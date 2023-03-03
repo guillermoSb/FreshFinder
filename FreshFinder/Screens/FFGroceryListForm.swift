@@ -9,23 +9,35 @@ import SwiftUI
 
 struct FFGroceryListForm: View {
     @Binding var presentGroceryListForm: Bool
+    @State var listName: String = ""
+    
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Spacer()
+        NavigationStack {
+            Form {
+                Section {
+                    TextField("Nombre", text: $listName)
+                } header: {
+                    Text("Información de tu lista")
+                }
+                
+                Section {
+                    List {
+                        Text("1")
+                        Text("2")
+                        Button("Agregar") {}
+                    }
+                } header: {
+                    Text("Productos")
+                }
+
+            }
+            .navigationTitle("Nueva Lista")
+            .toolbar {
                 Button("Cancelar") {
                     presentGroceryListForm = false
                 }
             }
-            .padding(.top, 24)
-            
-            Text("Nueva Lista")
-                .font(.largeTitle).bold()
-            Spacer()
         }
-        .padding(.horizontal, 24)
-        
-        
     }
 }
 
