@@ -8,8 +8,25 @@
 import SwiftUI
 
 struct FFGroceryLists: View {
+    @State private var presentGroceryListForm = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            VStack {
+                Text("Hi")
+            }
+            .sheet(isPresented: $presentGroceryListForm) {
+                FFGroceryListForm(presentGroceryListForm: $presentGroceryListForm)
+            }
+            .navigationTitle("Tus Listas")
+            .toolbar {
+                Button {
+                    presentGroceryListForm = true
+                } label: {
+                    Image(systemName: "plus")
+                }
+            }
+        }
     }
 }
 
