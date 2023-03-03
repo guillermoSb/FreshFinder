@@ -18,6 +18,7 @@
 		709E3BE229B1821700C8F6D0 /* FFGroceryLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709E3BE129B1821700C8F6D0 /* FFGroceryLists.swift */; };
 		709E3BE429B183F700C8F6D0 /* FFGroceryListForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709E3BE329B183F700C8F6D0 /* FFGroceryListForm.swift */; };
 		70FE7B2E29B19954009C3380 /* FFMainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FE7B2D29B19954009C3380 /* FFMainButton.swift */; };
+		70FE7B3029B1B3D4009C3380 /* FFGroceryListItemForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FE7B2F29B1B3D4009C3380 /* FFGroceryListItemForm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		709E3BE129B1821700C8F6D0 /* FFGroceryLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFGroceryLists.swift; sourceTree = "<group>"; };
 		709E3BE329B183F700C8F6D0 /* FFGroceryListForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFGroceryListForm.swift; sourceTree = "<group>"; };
 		70FE7B2D29B19954009C3380 /* FFMainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFMainButton.swift; sourceTree = "<group>"; };
+		70FE7B2F29B1B3D4009C3380 /* FFGroceryListItemForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFGroceryListItemForm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 			children = (
 				709E3BE129B1821700C8F6D0 /* FFGroceryLists.swift */,
 				709E3BE329B183F700C8F6D0 /* FFGroceryListForm.swift */,
+				70FE7B2F29B1B3D4009C3380 /* FFGroceryListItemForm.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				709E3BE229B1821700C8F6D0 /* FFGroceryLists.swift in Sources */,
 				709E3BBB29B1815000C8F6D0 /* Persistence.swift in Sources */,
 				709E3BE429B183F700C8F6D0 /* FFGroceryListForm.swift in Sources */,
+				70FE7B3029B1B3D4009C3380 /* FFGroceryListItemForm.swift in Sources */,
 				709E3BB229B1815000C8F6D0 /* FreshFinderApp.swift in Sources */,
 				70FE7B2E29B19954009C3380 /* FFMainButton.swift in Sources */,
 			);

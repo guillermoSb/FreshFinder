@@ -8,21 +8,17 @@
 import SwiftUI
 
 struct FFGroceryLists: View {
-    @State private var presentGroceryListForm = false
-    
+
     var body: some View {
         NavigationStack {
             VStack {
-                Button("Nueva Lista") {
-                    presentGroceryListForm = true
+                NavigationLink(destination: FFGroceryListForm()) {
+                    Text("Nueva Lista")
                 }
                 .buttonStyle(FFMainButton())
                 Spacer()
             }
             .padding(.top, 24)
-            .sheet(isPresented: $presentGroceryListForm) {
-                FFGroceryListForm(presentGroceryListForm: $presentGroceryListForm)
-            }
             .navigationTitle("Tus Listas")
             .padding(.horizontal)
             .frame(maxWidth: .infinity, alignment: .leading)

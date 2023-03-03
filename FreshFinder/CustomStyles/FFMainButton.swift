@@ -12,11 +12,12 @@ struct FFMainButton: ButtonStyle {
         configuration.label
             .padding(.horizontal, 24)
             .padding(.vertical, 12)
-            .foregroundColor(.white)
+            .foregroundColor(configuration.isPressed ? .white.opacity(0.8) : .white)
             .background(.blue)
             .clipShape(
                 RoundedRectangle(cornerRadius: 12)
             )
+            .animation(.linear(duration: 0.1), value: configuration.isPressed)
             
             
             
