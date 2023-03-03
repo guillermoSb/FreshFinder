@@ -13,19 +13,21 @@ struct FFGroceryLists: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Text("Hi")
+                Button("Nueva Lista") {
+                    presentGroceryListForm = true
+                }
+                .buttonStyle(FFMainButton())
+                Spacer()
             }
+            .padding(.top, 24)
             .sheet(isPresented: $presentGroceryListForm) {
                 FFGroceryListForm(presentGroceryListForm: $presentGroceryListForm)
             }
             .navigationTitle("Tus Listas")
-            .toolbar {
-                Button {
-                    presentGroceryListForm = true
-                } label: {
-                    Image(systemName: "plus")
-                }
-            }
+            .padding(.horizontal)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            
+            
         }
     }
 }
