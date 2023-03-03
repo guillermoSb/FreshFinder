@@ -13,7 +13,7 @@ struct FreshFinderApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            FFGroceryLists()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
