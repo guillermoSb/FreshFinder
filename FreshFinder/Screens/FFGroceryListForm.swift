@@ -12,6 +12,7 @@ struct FFGroceryListForm: View {
     @State private var listName: String = ""
     @State private var showItemForm: Bool = false
     
+    
     var body: some View {
         NavigationStack {
             Form {
@@ -23,8 +24,9 @@ struct FFGroceryListForm: View {
                 }
                 Section {
                     List {
-                        Text("1")
-                        Text("2")
+                        FFProductCell(itemName: "Manzanas", itemQuantity: 2)
+                        FFProductCell(itemName: "Pan Sandwich",itemPrice: 10.333 ,itemQuantity: 1)
+                        FFProductCell(itemName: "Pan Sandwich",itemPrice: 100.333 ,itemQuantity: 1)
                         Button("Agregar") {
                             showItemForm = true
                         }

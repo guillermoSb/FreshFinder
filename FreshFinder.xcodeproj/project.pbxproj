@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		708D60D529B2B5F2002063C6 /* FFProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708D60D429B2B5F2002063C6 /* FFProductCell.swift */; };
+		708D60D829B2F771002063C6 /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708D60D729B2F771002063C6 /* Double+Ext.swift */; };
 		709E3BB229B1815000C8F6D0 /* FreshFinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709E3BB129B1815000C8F6D0 /* FreshFinderApp.swift */; };
 		709E3BB629B1815000C8F6D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 709E3BB529B1815000C8F6D0 /* Assets.xcassets */; };
 		709E3BB929B1815000C8F6D0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 709E3BB829B1815000C8F6D0 /* Preview Assets.xcassets */; };
@@ -39,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		708D60D429B2B5F2002063C6 /* FFProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFProductCell.swift; sourceTree = "<group>"; };
+		708D60D729B2F771002063C6 /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
 		709E3BAE29B1815000C8F6D0 /* FreshFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreshFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		709E3BB129B1815000C8F6D0 /* FreshFinderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreshFinderApp.swift; sourceTree = "<group>"; };
 		709E3BB529B1815000C8F6D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -81,6 +85,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		708D60D329B2B5D0002063C6 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				708D60D429B2B5F2002063C6 /* FFProductCell.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		708D60D629B2F74F002063C6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				708D60D729B2F771002063C6 /* Double+Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		709E3BA529B1815000C8F6D0 = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +124,8 @@
 		709E3BB029B1815000C8F6D0 /* FreshFinder */ = {
 			isa = PBXGroup;
 			children = (
+				708D60D629B2F74F002063C6 /* Extensions */,
+				708D60D329B2B5D0002063C6 /* CustomViews */,
 				70FE7B2C29B198CF009C3380 /* CustomStyles */,
 				709E3BE029B181D700C8F6D0 /* Screens */,
 				709E3BB129B1815000C8F6D0 /* FreshFinderApp.swift */,
@@ -291,10 +313,12 @@
 				709E3BBE29B1815000C8F6D0 /* FreshFinder.xcdatamodeld in Sources */,
 				709E3BE229B1821700C8F6D0 /* FFGroceryLists.swift in Sources */,
 				709E3BBB29B1815000C8F6D0 /* Persistence.swift in Sources */,
+				708D60D529B2B5F2002063C6 /* FFProductCell.swift in Sources */,
 				709E3BE429B183F700C8F6D0 /* FFGroceryListForm.swift in Sources */,
 				70FE7B3029B1B3D4009C3380 /* FFGroceryListItemForm.swift in Sources */,
 				709E3BB229B1815000C8F6D0 /* FreshFinderApp.swift in Sources */,
 				70FE7B2E29B19954009C3380 /* FFMainButton.swift in Sources */,
+				708D60D829B2F771002063C6 /* Double+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
