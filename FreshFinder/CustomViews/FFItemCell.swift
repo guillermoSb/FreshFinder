@@ -9,8 +9,8 @@ import SwiftUI
 
 struct FFItemCell: View {
     var itemName: String
-    var itemPrice: Double?
     var itemQuantity: Int
+    var itemPrice: Double?
     
     var body: some View {
         HStack {
@@ -34,6 +34,6 @@ struct FFItemCell: View {
 
 struct FFProductCell_Previews: PreviewProvider {
     static var previews: some View {
-        FFItemCell(itemName: "Manzanas", itemPrice: 33.333, itemQuantity: 2)
+        FFItemCell(itemName: "Manzanas", itemQuantity: 2, itemPrice: 33.333)
     }
 }

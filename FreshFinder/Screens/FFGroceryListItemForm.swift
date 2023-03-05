@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FFGroceryListItemForm: View {
     @Binding var isPresented: Bool
+    @Binding var items: [GroceryListItem]
     @State var itemName: String = ""
     @State var itemPrice: String = ""
     @State var itemQuantity: Int = 1
@@ -27,6 +28,11 @@ struct FFGroceryListItemForm: View {
                 }
                 Section {
                     Button("Agregar") {
+                        var newItem = GroceryListItem(name: itemName, quantity: itemQuantity)
+                        if let price = Double(itemPrice) {
+                            newItem.price = price
+                        }
+                        items.append(newItem)
                         isPresented = false
                     }
                     .buttonStyle(FFMainButton())
@@ -49,6 +55,6 @@ struct FFGroceryListItemForm: View {
 
 struct FFGroceryListItemForm_Previews: PreviewProvider {
     static var previews: some View {
-        FFGroceryListItemForm(isPresented: .constant(true))
+        FFGroceryListItemForm(isPresented: .constant(true), items: .constant([]))
     }
 }
