@@ -9,8 +9,11 @@ import SwiftUI
 
 struct FFGroceryListForm: View {
     @Environment(\.presentationMode) var presentation
+    
     @State private var listName: String = ""
     @State private var showItemForm: Bool = false
+    
+    @EnvironmentObject var groceryListStore: GroceryListStore
     
     
     var body: some View {
@@ -61,5 +64,6 @@ struct FFGroceryListForm_Previews: PreviewProvider {
     
     static var previews: some View {
         FFGroceryListForm()
+            .environmentObject(GroceryListStore())
     }
 }

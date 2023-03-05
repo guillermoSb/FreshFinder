@@ -9,4 +9,9 @@ import Combine
 
 class GroceryListStore: ObservableObject {
     
+    
+    
+    // MARK: User Intents
+    
+    
 }
