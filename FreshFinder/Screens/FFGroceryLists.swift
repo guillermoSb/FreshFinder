@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct FFGroceryLists: View {
+    
+    @ObservedObject var groceryListStore: GroceryListStore
 
     var body: some View {
         NavigationStack {
@@ -30,6 +32,6 @@ struct FFGroceryLists: View {
 
 struct FFGroceryLists_Previews: PreviewProvider {
     static var previews: some View {
-        FFGroceryLists()
+        FFGroceryLists(groceryListStore: GroceryListStore())
     }
 }

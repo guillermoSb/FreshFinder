@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FFProductCell: View {
+struct FFItemCell: View {
     var itemName: String
     var itemPrice: Double?
     var itemQuantity: Int
@@ -34,6 +34,6 @@ struct FFProductCell: View {
 
 struct FFProductCell_Previews: PreviewProvider {
     static var previews: some View {
-        FFProductCell(itemName: "Manzanas", itemPrice: 33.333, itemQuantity: 2)
+        FFItemCell(itemName: "Manzanas", itemPrice: 33.333, itemQuantity: 2)
     }
 }

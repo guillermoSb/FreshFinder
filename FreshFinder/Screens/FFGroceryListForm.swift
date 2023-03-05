@@ -24,9 +24,9 @@ struct FFGroceryListForm: View {
                 }
                 Section {
                     List {
-                        FFProductCell(itemName: "Manzanas", itemQuantity: 2)
-                        FFProductCell(itemName: "Pan Sandwich",itemPrice: 10.333 ,itemQuantity: 1)
-                        FFProductCell(itemName: "Pan Sandwich",itemPrice: 100.333 ,itemQuantity: 1)
+                        FFItemCell(itemName: "Manzanas", itemQuantity: 2)
+                        FFItemCell(itemName: "Pan Sandwich",itemPrice: 20.5 ,itemQuantity: 1)
+                        FFItemCell(itemName: "Pan Sandwich",itemPrice: 100.333 ,itemQuantity: 1)
                         Button("Agregar") {
                             showItemForm = true
                         }
