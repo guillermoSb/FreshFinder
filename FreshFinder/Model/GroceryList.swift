@@ -13,7 +13,10 @@ struct GroceryList: Hashable {
     var items: [GroceryListItem]
 }
 
-struct GroceryListItem: Hashable {
+struct GroceryListItem: Hashable, Identifiable {
+    var id: String {
+        return UUID().uuidString
+    }
     var name: String
     var quantity: Int
     var price: Double?

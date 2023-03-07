@@ -8,11 +8,21 @@
 import SwiftUI
 
 struct FFGroceryListItemForm: View {
-    @Binding var isPresented: Bool
+    @Binding var selectedItem: GroceryListItem?
     @Binding var items: [GroceryListItem]
+    
     @State var itemName: String = ""
     @State var itemPrice: String = ""
     @State var itemQuantity: Int = 1
+    
+    var editMode: Bool {
+        guard let selectedItem else {return false}
+        let idx = items.firstIndex(of: selectedItem)
+        guard idx != nil else { return false }
+        return true
+    }
+    
+    
     var body: some View {
         NavigationStack {
             Form {
@@ -27,27 +37,41 @@ struct FFGroceryListItemForm: View {
                     Text("Información del producto")
                 }
                 Section {
-                    Button("Agregar") {
+                    Button("\(editMode ? "Editar" : "Guardar")") {
                         var newItem = GroceryListItem(name: itemName, quantity: itemQuantity)
                         if let price = Double(itemPrice) {
                             newItem.price = price
                         }
-                        items.append(newItem)
-                        isPresented = false
+                        
+                        if let selectedItem, let idx = items.firstIndex(of: selectedItem) {
+                            if editMode {
+                                items[idx] = newItem
+                            }
+                        } else {
+                            items.append(newItem)
+                        }
+                        selectedItem = nil
                     }
                     .buttonStyle(FFMainButton())
                 }
                 .listRowInsets(.init())
                 .listRowBackground(Color.white.opacity(0))
-
+                
             }
-            .navigationTitle("Agregar Producto")
+            .navigationTitle("\(editMode ? "Editar" : "Crear") Producto")
             .toolbar {
-                Button("Cancel") {
-                    isPresented = false
+                Button("Cancelar") {
+                    selectedItem = nil
                 }
             }
             
+        }
+        .onAppear {
+            if let selectedItem {
+                itemName = selectedItem.name
+                itemQuantity = selectedItem.quantity
+                itemPrice = selectedItem.price != nil ? String(format: "%.2f", selectedItem.price!) : ""
+            }
         }
         
     }
@@ -55,6 +79,8 @@ struct FFGroceryListItemForm: View {
 
 struct FFGroceryListItemForm_Previews: PreviewProvider {
     static var previews: some View {
-        FFGroceryListItemForm(isPresented: .constant(true), items: .constant([]))
+        FFGroceryListItemForm(selectedItem: .constant(GroceryListItem(name: "Manzana", quantity: 2)), items: .constant([
+            GroceryListItem(name: "Manzana", quantity: 2)
+            ]))
     }
 }

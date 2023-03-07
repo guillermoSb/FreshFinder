@@ -13,6 +13,7 @@ struct FFGroceryListForm: View {
     @State private var listName: String = ""
     @State private var showItemForm: Bool = false
     @State private var items: [GroceryListItem] = []
+    @State private var selectedItem: GroceryListItem? = nil
     
     @EnvironmentObject var groceryListStore: GroceryListStore
     
@@ -34,8 +35,12 @@ struct FFGroceryListForm: View {
                 }
                 Section {
                     List {
-                        ForEach(items, id: \.name) { item in
+                        ForEach(items, id: \.id) { item in
                             FFItemCell(itemName: item.name, itemQuantity: item.quantity, itemPrice: item.price)
+                                .onTapGesture {
+                                    selectedItem = item
+                                    showItemForm = true
+                                }
                                 
                         }
                         .onDelete { positionsRemoved in
@@ -45,10 +50,10 @@ struct FFGroceryListForm: View {
                             items.move(fromOffsets: positionsMoved, toOffset: destinationPosition)
                         }
                         Button("Agregar") {
-                            showItemForm = true
+                            selectedItem = GroceryListItem(name: "", quantity: 1)
                         }
-                        .sheet(isPresented: $showItemForm) {
-                            FFGroceryListItemForm(isPresented: $showItemForm, items: $items)
+                        .sheet(item: $selectedItem) { item in
+                            FFGroceryListItemForm(selectedItem: $selectedItem, items: $items)
                         }
                     }
                     
