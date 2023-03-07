@@ -19,8 +19,9 @@ struct FFGroceryListItemForm: View {
         guard let selectedItem else {return false}
         let idx = items.firstIndex(of: selectedItem)
         guard idx != nil else { return false }
-        return true
+        return true  
     }
+    
     
     
     var body: some View {

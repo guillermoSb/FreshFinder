@@ -14,8 +14,13 @@ struct FFGroceryListForm: View {
     @State private var showItemForm: Bool = false
     @State private var items: [GroceryListItem] = []
     @State private var selectedItem: GroceryListItem? = nil
-    
     @EnvironmentObject var groceryListStore: GroceryListStore
+    
+    var budget: Double {
+        items.reduce(0) { partialResult, item in
+            partialResult + (item.price ?? 0) * Double(item.quantity)
+        }
+    }
     
     init(){}
     init(listName: String, items: [GroceryListItem]) {
@@ -33,9 +38,15 @@ struct FFGroceryListForm: View {
                 } header: {
                     Text("Información de tu lista")
                 }
+                Text("\(budget.toCurrencyString())")
+                    .font(.largeTitle)
+                    .minimumScaleFactor(0.75)
+                    .listRowInsets(.init())
+                    .listRowBackground(Color.white.opacity(0))
+                    .frame(maxWidth: .infinity, alignment: .center)
                 Section {
                     List {
-                        ForEach(items, id: \.id) { item in
+                        ForEach(items, id: \.self) { item in
                             FFItemCell(itemName: item.name, itemQuantity: item.quantity, itemPrice: item.price)
                                 .onTapGesture {
                                     selectedItem = item
