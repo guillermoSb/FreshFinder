@@ -8,13 +8,21 @@
 import SwiftUI
 
 struct FFGroceryListItemForm: View {
+    
+    // Form fields that can be focused by code
+    enum FocusedField {
+        case itemName
+    }
+    
     @Binding var selectedItem: GroceryListItem?
     @Binding var items: [GroceryListItem]
+    @FocusState private var focusedField: FocusedField?
     
     @State var itemName: String = ""
     @State var itemPrice: String = ""
     @State var itemQuantity: Int = 1
-    
+  
+    // Wether the view is editing an item or adding
     var editMode: Bool {
         guard let selectedItem else {return false}
         let idx = items.firstIndex(of: selectedItem)
@@ -29,6 +37,7 @@ struct FFGroceryListItemForm: View {
             Form {
                 Section {
                     TextField("Nombre del producto", text: $itemName)
+                        .focused($focusedField, equals: .itemName)
                     TextField("Precio", text: $itemPrice)
                         .keyboardType(.decimalPad)
                     Stepper(value: $itemQuantity, in: 1...100, step: 1) {
@@ -43,7 +52,6 @@ struct FFGroceryListItemForm: View {
                         if let price = Double(itemPrice) {
                             newItem.price = price
                         }
-                        
                         if let selectedItem, let idx = items.firstIndex(of: selectedItem) {
                             if editMode {
                                 items[idx] = newItem
@@ -62,13 +70,15 @@ struct FFGroceryListItemForm: View {
             .navigationTitle("\(editMode ? "Editar" : "Crear") Producto")
             .toolbar {
                 Button("Cancelar") {
-                    selectedItem = nil
+                    selectedItem = nil  // Remove the binding so the view can be dismissed
                 }
             }
             
         }
         .onAppear {
+            focusedField = .itemName    // Set the focus on the item name
             if let selectedItem {
+                // Add to the state fields the item fields
                 itemName = selectedItem.name
                 itemQuantity = selectedItem.quantity
                 itemPrice = selectedItem.price != nil ? String(format: "%.2f", selectedItem.price!) : ""
