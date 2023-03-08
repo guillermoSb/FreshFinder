@@ -11,16 +11,9 @@ struct FFGroceryListForm: View {
     @Environment(\.presentationMode) var presentation
     
     @State private var listName: String = ""
-    @State private var showItemForm: Bool = false
     @State private var items: [GroceryListItem] = []
     @State private var selectedItem: GroceryListItem? = nil
     @EnvironmentObject var groceryListStore: GroceryListStore
-    
-    var budget: Double {
-        items.reduce(0) { partialResult, item in
-            partialResult + (item.price ?? 0) * Double(item.quantity)
-        }
-    }
     
     init(){}
     init(listName: String, items: [GroceryListItem]) {
@@ -38,7 +31,7 @@ struct FFGroceryListForm: View {
                 } header: {
                     Text("Información de tu lista")
                 }
-                Text("\(budget.toCurrencyString())")
+                Text("\(items.budget().toCurrencyString())")
                     .font(.largeTitle)
                     .minimumScaleFactor(0.75)
                     .listRowInsets(.init())
@@ -50,7 +43,6 @@ struct FFGroceryListForm: View {
                             FFItemCell(itemName: item.name, itemQuantity: item.quantity, itemPrice: item.price)
                                 .onTapGesture {
                                     selectedItem = item
-                                    showItemForm = true
                                 }
                                 
                         }
@@ -77,6 +69,7 @@ struct FFGroceryListForm: View {
                 
                 Section {
                     Button("Guardar") {
+                        groceryListStore.addList(GroceryList(name: listName, items: items))
                         presentation.wrappedValue.dismiss()
                     }
                     .buttonStyle(FFMainButton())
@@ -101,6 +94,6 @@ struct FFGroceryListForm_Previews: PreviewProvider {
             GroceryListItem(name: "Manzana", quantity: 1)
         ])
         return view
-            .environmentObject(GroceryListStore())
+            .environmentObject(GroceryListStore(groceryLists: []))
     }
 }

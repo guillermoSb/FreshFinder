@@ -13,7 +13,7 @@ struct FreshFinderApp: App {
 
     var body: some Scene {
         WindowGroup {
-            FFGroceryLists(groceryListStore: GroceryListStore())
+            FFGroceryLists(groceryListStore: GroceryListStore(groceryLists: []))
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

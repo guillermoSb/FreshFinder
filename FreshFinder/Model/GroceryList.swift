@@ -8,7 +8,10 @@
 import Foundation
 
 
-struct GroceryList: Hashable {
+struct GroceryList: Hashable, Identifiable {
+    var id: String {
+        return UUID().uuidString
+    }
     var name: String
     var items: [GroceryListItem]
 }
