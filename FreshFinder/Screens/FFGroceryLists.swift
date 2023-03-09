@@ -24,8 +24,12 @@ struct FFGroceryLists: View {
 
                     ForEach(groceryListStore.groceryLists, id: \.id) { groceryList in
                         groceryListCell(groceryList: groceryList)
+                            .background(NavigationLink("", destination: {
+                                FFGroceryList()
+                            }))
                             .listRowInsets(EdgeInsets())
                             .listRowSeparator(.hidden)
+                            
                     }
                     .onDelete(perform: { deletedRows in
                         groceryListStore.deleteLists(at: deletedRows)
