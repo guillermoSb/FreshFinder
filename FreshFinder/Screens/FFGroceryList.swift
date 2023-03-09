@@ -32,9 +32,9 @@ struct FFGroceryList: View {
                 } label: {
                     Text("Reiniciar")
                         .font(.system(size: 20, weight: .bold))
-                        .foregroundColor(.green)
+                        .foregroundColor(.blue)
                 }
-                .buttonStyle(FFMainButton(backgroundColor: .green.opacity(0.2)))
+                .buttonStyle(FFMainButton(backgroundColor: .blue.opacity(0.2)))
             }
             
             VStack(alignment: .leading, spacing: 24) {
@@ -49,7 +49,7 @@ struct FFGroceryList: View {
             }
             
         }
-        .padding(.top, 60)
+        
         
     }
     
