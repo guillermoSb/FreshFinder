@@ -21,22 +21,29 @@ struct FFGroceryLists: View {
                 }
                 .buttonStyle(FFMainButton())
                 List {
-
                     ForEach(groceryListStore.groceryLists, id: \.id) { groceryList in
-                        groceryListCell(groceryList: groceryList)
-                            .background(NavigationLink("", destination: {
-                                FFGroceryList()
-                            }))
-                            .listRowInsets(EdgeInsets())
-                            .listRowSeparator(.hidden)
-                            
+                        ZStack {
+                            NavigationLink {
+                                FFGroceryList(groceryList: groceryList)
+                            } label: {
+                                EmptyView()
+                            }
+                            groceryListCell(groceryList: groceryList)
+                                .buttonStyle(.plain)
+                        }
+                        
+                        .listRowInsets(EdgeInsets())
+                        .listRowSeparator(.hidden)
                     }
                     .onDelete(perform: { deletedRows in
                         groceryListStore.deleteLists(at: deletedRows)
                     })
-                    .padding(.top)
+                    
+                    
                 }
                 .listStyle(.inset)
+                .environment(\.defaultMinListRowHeight, 124)
+                
             }
             .padding(.top, 24)
             .padding(.horizontal)
@@ -45,31 +52,13 @@ struct FFGroceryLists: View {
         }
     }
     
-    @ViewBuilder
-    func groceryListCell(groceryList: GroceryList) -> some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 12) {
-                Text(groceryList.name)
-                    .font(.title2)
-                Text("\(groceryList.items.count) productos")
-            }
-            Spacer()
-            Text(groceryList.items.budget().toCurrencyString())
-                .font(.title)
-        }
-        .padding(24)
-        .background(
-            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .strokeBorder(Color.black, lineWidth: 2)
-                .background(RoundedRectangle(cornerRadius: 20).fill(.thinMaterial))
-        )
-    }
 }
 
 struct FFGroceryLists_Previews: PreviewProvider {
     static var previews: some View {
         FFGroceryLists(groceryListStore: GroceryListStore(groceryLists: [
-            GroceryList(name: "Test List", items: [GroceryListItem(name: "Manzana", quantity: 2)])
+            GroceryList(name: "Primera Lista", items: [GroceryListItem(name: "Manzana", quantity: 2)]),
+            GroceryList(name: "Segunda Lista", items: [GroceryListItem(name: "Manzana", quantity: 2)])
         ]))
     }
 }
