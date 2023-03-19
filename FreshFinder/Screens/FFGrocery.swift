@@ -58,6 +58,7 @@ struct FFGrocery: View {
                           !groceryViewModel.grocery.list.items.hasPrevIndex(for: groceryViewModel.currentItemIndex!)
                           : true)
                 Button {
+                    groceryViewModel.finish()
                     presentation.wrappedValue.dismiss()
                 } label: {
                     Text("Terminar")
@@ -79,7 +80,7 @@ struct FFGrocery: View {
         
     }
     
-    
+
     private let itemFontSize: CGFloat = 52
     private let iconSize: CGFloat = 40
 }

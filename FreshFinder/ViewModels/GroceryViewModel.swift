@@ -29,7 +29,14 @@ class GroceryViewModel: ObservableObject {
     }
     
     func discard() {
+        if let idx = grocery.itemsPurchased.firstIndex(of: currentItem) {
+            grocery.itemsPurchased.remove(at: idx)
+        }
         nextItem()
+    }
+    
+    func finish() {
+        self.currentItem = grocery.list.items[0]
     }
     
     func nextItem() {
