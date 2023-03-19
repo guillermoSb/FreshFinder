@@ -14,15 +14,16 @@ struct FFGroceryList: View {
             Text(groceryList.name).font(.largeTitle)
             Text(groceryList.items.budget().toCurrencyString()).font(.title2)
             HStack(spacing: 24) {
-                Button {
-                    // Start Shopping session
+                NavigationLink {
+                    FFGrocery(currentItem: groceryList.items[0])
                 } label: {
                     Image(systemName: "play.fill")
                         .font(.system(size: iconSize))
                         .tint(.green)
-                       
+                    
                 }
                 .buttonStyle(FFCircleButton(foregroundColor: .green))
+
                 Button {
                     // Restart
                 } label: {

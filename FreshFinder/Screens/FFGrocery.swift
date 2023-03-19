@@ -22,8 +22,6 @@ struct FFGrocery: View {
             }
             .font(.title3)
             
-            
-            
             Spacer()
             HStack {
                 Button {
@@ -46,6 +44,7 @@ struct FFGrocery: View {
                 .buttonStyle(FFCircleButton(foregroundColor: .green))
             }
             .padding(.horizontal, 52)
+            .padding(.bottom, 20)
         }
         
     }
