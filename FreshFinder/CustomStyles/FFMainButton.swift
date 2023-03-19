@@ -30,11 +30,6 @@ struct FFMainButton: ButtonStyle {
             )
             .opacity(configuration.isPressed ? 0.3 : 1)
             .animation(.linear(duration: 0.08), value: configuration.isPressed)
-            
-            
-            
-        
-            
-        
+
     }
 }

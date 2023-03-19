@@ -20,13 +20,9 @@ struct FFGroceryList: View {
                     Image(systemName: "play.fill")
                         .font(.system(size: iconSize))
                         .tint(.green)
-                        .frame(width: 60, height: 60)
-                        .padding()
-                        .background(
-                            Circle()
-                                .fill(.green.opacity(0.2))
-                        )
+                       
                 }
+                .buttonStyle(FFCircleButton(foregroundColor: .green))
                 Button {
                     // Restart
                 } label: {
