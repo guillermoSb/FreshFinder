@@ -10,6 +10,7 @@
 		702D4D4129C694B10055E053 /* FFGrocery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702D4D4029C694B10055E053 /* FFGrocery.swift */; };
 		702D4D4329C696050055E053 /* FFCircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702D4D4229C696050055E053 /* FFCircleButton.swift */; };
 		7063D6BB29C7AE91005E7D3B /* Grocery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7063D6BA29C7AE91005E7D3B /* Grocery.swift */; };
+		7063D6BD29C7AF1A005E7D3B /* GroceryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7063D6BC29C7AF1A005E7D3B /* GroceryViewModel.swift */; };
 		708D60D529B2B5F2002063C6 /* FFItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708D60D429B2B5F2002063C6 /* FFItemCell.swift */; };
 		708D60D829B2F771002063C6 /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708D60D729B2F771002063C6 /* Double+Ext.swift */; };
 		709E3BB229B1815000C8F6D0 /* FreshFinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709E3BB129B1815000C8F6D0 /* FreshFinderApp.swift */; };
@@ -52,6 +53,7 @@
 		702D4D4029C694B10055E053 /* FFGrocery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFGrocery.swift; sourceTree = "<group>"; };
 		702D4D4229C696050055E053 /* FFCircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFCircleButton.swift; sourceTree = "<group>"; };
 		7063D6BA29C7AE91005E7D3B /* Grocery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grocery.swift; sourceTree = "<group>"; };
+		7063D6BC29C7AF1A005E7D3B /* GroceryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryViewModel.swift; sourceTree = "<group>"; };
 		708D60D429B2B5F2002063C6 /* FFItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFItemCell.swift; sourceTree = "<group>"; };
 		708D60D729B2F771002063C6 /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
 		709E3BAE29B1815000C8F6D0 /* FreshFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreshFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -198,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				70A7FF2029B42FB9000EF8F5 /* GroceryListStore.swift */,
+				7063D6BC29C7AF1A005E7D3B /* GroceryViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 			files = (
 				70C8371729BA92E7009582A3 /* FFGroceryListCell.swift in Sources */,
 				7063D6BB29C7AE91005E7D3B /* Grocery.swift in Sources */,
+				7063D6BD29C7AF1A005E7D3B /* GroceryViewModel.swift in Sources */,
 				702D4D4129C694B10055E053 /* FFGrocery.swift in Sources */,
 				709E3BBE29B1815000C8F6D0 /* FreshFinder.xcdatamodeld in Sources */,
 				709E3BE229B1821700C8F6D0 /* FFGroceryLists.swift in Sources */,

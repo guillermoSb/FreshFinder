@@ -10,6 +10,6 @@ import Foundation
 
 struct Grocery {
     let list: GroceryList
-    let itemsPurchased: [GroceryListItem]
+    var itemsPurchased: [GroceryListItem]
     let createdAt = Date()
 }

@@ -8,16 +8,19 @@
 import SwiftUI
 
 struct FFGrocery: View {
-    @State var currentItem: GroceryListItem
+    @Environment(\.presentationMode) var presentation
+    @ObservedObject var groceryViewModel: GroceryViewModel
+    
+    
     var body: some View {
         VStack(spacing: 24) {
-            Text(currentItem.name)
+            Text(groceryViewModel.currentItem.name)
                 .font(.system(size: itemFontSize))
             VStack(alignment: .leading, spacing: 12) {
-                Text("Cantidad: \(currentItem.quantity)")
-                if let price = currentItem.price {
+                Text("Cantidad: \(groceryViewModel.currentItem.quantity)")
+                if let price = groceryViewModel.currentItem.price {
                     Text("Precio Unitario: \(price.toCurrencyString())")
-                    Text("Total: \((Double(currentItem.quantity) * price).toCurrencyString())")
+                    Text("Total: \((Double(groceryViewModel.currentItem.quantity) * price).toCurrencyString())")
                 }
             }
             .font(.title3)
@@ -25,7 +28,7 @@ struct FFGrocery: View {
             Spacer()
             HStack {
                 Button {
-                    // Start Shopping session
+                    groceryViewModel.discard()
                 } label: {
                     Image(systemName: "xmark")
                         .font(.system(size: iconSize))
@@ -34,7 +37,7 @@ struct FFGrocery: View {
                 .buttonStyle(FFCircleButton(foregroundColor: .red))
                 Spacer()
                 Button {
-                    // Start Shopping session
+                    groceryViewModel.buy()
                 } label: {
                     Image(systemName: "cart.fill")
                         .font(.system(size: iconSize))
@@ -45,9 +48,37 @@ struct FFGrocery: View {
             }
             .padding(.horizontal, 52)
             .padding(.bottom, 20)
+            HStack(spacing: 20) {
+                Button {
+                    groceryViewModel.prevItem()
+                } label: {
+                    Text("Anterior")
+                }
+                .disabled(groceryViewModel.currentItemIndex != nil ?
+                          !groceryViewModel.grocery.list.items.hasPrevIndex(for: groceryViewModel.currentItemIndex!)
+                          : true)
+                Button {
+                    presentation.wrappedValue.dismiss()
+                } label: {
+                    Text("Terminar")
+                }
+                .buttonStyle(FFMainButton(backgroundColor: .blue))
+                
+                Button {
+                    groceryViewModel.nextItem()
+                } label: {
+                    Text("Siguiente")
+                }
+                .disabled(groceryViewModel.currentItemIndex != nil ?
+                          !groceryViewModel.grocery.list.items.hasNextItem(for: groceryViewModel.currentItemIndex!)
+                          : true)
+            }
+           
+
         }
         
     }
+    
     
     private let itemFontSize: CGFloat = 52
     private let iconSize: CGFloat = 40
@@ -55,6 +86,9 @@ struct FFGrocery: View {
 
 struct FFGrocery_Previews: PreviewProvider {
     static var previews: some View {
-        FFGrocery(currentItem: GroceryListItem(name: "Manzana", quantity: 12, price: 1.50))
+        FFGrocery(groceryViewModel: GroceryViewModel(with: GroceryList(name: "Super Semanal", items: [
+            GroceryListItem(name: "Manzana", quantity: 1, price: 1.50),
+            GroceryListItem(name: "Peras", quantity: 2, price: 2.50)
+        ])))
     }
 }

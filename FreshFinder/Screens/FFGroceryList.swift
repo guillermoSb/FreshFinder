@@ -15,7 +15,7 @@ struct FFGroceryList: View {
             Text(groceryList.items.budget().toCurrencyString()).font(.title2)
             HStack(spacing: 24) {
                 NavigationLink {
-                    FFGrocery(currentItem: groceryList.items[0])
+                    FFGrocery(groceryViewModel: GroceryViewModel(with: self.groceryList))
                 } label: {
                     Image(systemName: "play.fill")
                         .font(.system(size: iconSize))
@@ -55,9 +55,11 @@ struct FFGroceryList: View {
 
 struct FFGroceryList_Previews: PreviewProvider {
     static var previews: some View {
-        FFGroceryList(groceryList: GroceryList(name: "Mi Lista", items: [
-            GroceryListItem(name: "Manzanas", quantity: 2),
-            GroceryListItem(name: "Cereal", quantity: 1)
-        ]))
+        NavigationStack {
+            FFGroceryList(groceryList: GroceryList(name: "Mi Lista", items: [
+                GroceryListItem(name: "Manzanas", quantity: 2, price: 1.50),
+                GroceryListItem(name: "Cereal", quantity: 1)
+            ]))
+        }
     }
 }
