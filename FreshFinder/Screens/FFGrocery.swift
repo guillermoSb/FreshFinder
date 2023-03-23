@@ -14,7 +14,7 @@ struct FFGrocery: View {
     
     var body: some View {
         VStack(spacing: 24) {
-            Text(groceryViewModel.currentItem.name)
+            Text(groceryViewModel.currentItem.wrappedName)
                 .font(.system(size: itemFontSize))
             VStack(alignment: .leading, spacing: 12) {
                 Text("Cantidad: \(groceryViewModel.currentItem.quantity)")
@@ -54,7 +54,7 @@ struct FFGrocery: View {
                     Text("Anterior")
                 }
                 .disabled(groceryViewModel.currentItemIndex != nil ?
-                          !groceryViewModel.grocery.list.items.hasPrevIndex(for: groceryViewModel.currentItemIndex!)
+                          !groceryViewModel.grocery.list.wrappedItems.hasPrevIndex(for: groceryViewModel.currentItemIndex!)
                           : true)
                 Button {
                     groceryViewModel.finish()
@@ -70,7 +70,7 @@ struct FFGrocery: View {
                     Text("Siguiente")
                 }
                 .disabled(groceryViewModel.currentItemIndex != nil ?
-                          !groceryViewModel.grocery.list.items.hasNextItem(for: groceryViewModel.currentItemIndex!)
+                          !groceryViewModel.grocery.list.wrappedItems.hasNextItem(for: groceryViewModel.currentItemIndex!)
                           : true)
             }
            
@@ -86,9 +86,6 @@ struct FFGrocery: View {
 
 struct FFGrocery_Previews: PreviewProvider {
     static var previews: some View {
-        FFGrocery(groceryViewModel: GroceryViewModel(with: GroceryList(name: "Super Semanal", items: [
-            GroceryListItem(name: "Manzana", quantity: 1, price: 1.50),
-            GroceryListItem(name: "Peras", quantity: 2, price: 2.50)
-        ])))
+        FFGrocery(groceryViewModel: GroceryViewModel(with: GroceryList.example))
     }
 }

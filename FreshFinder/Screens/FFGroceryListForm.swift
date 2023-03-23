@@ -24,65 +24,7 @@ struct FFGroceryListForm: View {
     
     var body: some View {
         NavigationStack {
-            Form {
-                Section {
-                    TextField("Nombre", text: $listName)
-                        .minimumScaleFactor(0.75)
-                } header: {
-                    Text("Información de tu lista")
-                }
-                Text("\(items.budget().toCurrencyString())")
-                    .font(.largeTitle)
-                    .minimumScaleFactor(0.75)
-                    .listRowInsets(.init())
-                    .listRowBackground(Color.white.opacity(0))
-                    .frame(maxWidth: .infinity, alignment: .center)
-                Section {
-                    List {
-                        ForEach(items, id: \.self) { item in
-                            FFItemCell(itemName: item.name, itemQuantity: item.quantity, itemPrice: item.price)
-                                .onTapGesture {
-                                    selectedItem = item
-                                }
-                                
-                        }
-                        .onDelete { positionsRemoved in
-                            items.remove(atOffsets: positionsRemoved)
-                        }
-                        .onMove { positionsMoved, destinationPosition in
-                            items.move(fromOffsets: positionsMoved, toOffset: destinationPosition)
-                        }
-                        Button("Agregar") {
-                            selectedItem = GroceryListItem(name: "", quantity: 1)
-                        }
-                        .sheet(item: $selectedItem) { item in
-                            FFGroceryListItemForm(selectedItem: $selectedItem, items: $items)
-                        }
-                    }
-                    
-                    
-                } header: {
-                    Text("Productos")
-                } footer: {
-                    Text("Arrastra los elementos de la lista para modificar su orden.")
-                }
-                
-                Section {
-                    Button("Guardar") {
-                        groceryListStore.addList(GroceryList(name: listName, items: items))
-                        presentation.wrappedValue.dismiss()
-                    }
-                    .buttonStyle(FFMainButton())
-                }
-                .listRowInsets(.init())
-                .listRowBackground(Color.white.opacity(0))
-                                
-                                
-                                
-                
-            }
-            
-            .navigationTitle("Nueva Lista")
+           
         }
     }
 }
@@ -91,9 +33,66 @@ struct FFGroceryListForm_Previews: PreviewProvider {
     
     static var previews: some View {
         let view = FFGroceryListForm(listName: "Prueba", items: [
-            GroceryListItem(name: "Manzana", quantity: 1)
+    
         ])
         return view
-            .environmentObject(GroceryListStore(groceryLists: []))
+            .environmentObject(GroceryListStore(viewContext: PersistenceController.preview.container.viewContext))
     }
 }
+
+
+
+//Form {
+//    Section {
+//        TextField("Nombre", text: $listName)
+//            .minimumScaleFactor(0.75)
+//    } header: {
+//        Text("Información de tu lista")
+//    }
+//    Text("\(items.budget().toCurrencyString())")
+//        .font(.largeTitle)
+//        .minimumScaleFactor(0.75)
+//        .listRowInsets(.init())
+//        .listRowBackground(Color.white.opacity(0))
+//        .frame(maxWidth: .infinity, alignment: .center)
+//    Section {
+//        List {
+//            ForEach(items, id: \.self) { item in
+//                FFItemCell(itemName: item.name, itemQuantity: item.quantity, itemPrice: item.price)
+//                    .onTapGesture {
+//                        selectedItem = item
+//                    }
+//
+//            }
+//            .onDelete { positionsRemoved in
+//                items.remove(atOffsets: positionsRemoved)
+//            }
+//            .onMove { positionsMoved, destinationPosition in
+//                items.move(fromOffsets: positionsMoved, toOffset: destinationPosition)
+//            }
+//            Button("Agregar") {
+//                selectedItem = GroceryListItem(name: "", quantity: 1)
+//            }
+//            .sheet(item: $selectedItem) { item in
+//                FFGroceryListItemForm(selectedItem: $selectedItem, items: $items)
+//            }
+//        }
+//
+//
+//    } header: {
+//        Text("Productos")
+//    } footer: {
+//        Text("Arrastra los elementos de la lista para modificar su orden.")
+//    }
+//
+//    Section {
+//        Button("Guardar") {
+////                        groceryListStore.addList(GroceryList(name: listName, items: items))
+//            presentation.wrappedValue.dismiss()
+//        }
+//        .buttonStyle(FFMainButton())
+//    }
+//    .listRowInsets(.init())
+//    .listRowBackground(Color.white.opacity(0))
+//}
+//.navigationTitle("Nueva Lista")

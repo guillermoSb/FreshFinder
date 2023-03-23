@@ -56,9 +56,7 @@ struct FFGroceryLists: View {
 
 struct FFGroceryLists_Previews: PreviewProvider {
     static var previews: some View {
-        FFGroceryLists(groceryListStore: GroceryListStore(groceryLists: [
-            GroceryList(name: "Primera Lista", items: [GroceryListItem(name: "Manzana", quantity: 2)]),
-            GroceryList(name: "Segunda Lista", items: [GroceryListItem(name: "Manzana", quantity: 2)])
-        ]))
+        FFGroceryLists(groceryListStore: GroceryListStore(viewContext: PersistenceController.preview.container.viewContext))
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

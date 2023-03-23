@@ -12,7 +12,7 @@ class GroceryViewModel: ObservableObject {
     @Published private(set) var currentItem: GroceryListItem
     
     var currentItemIndex: Int? {
-        grocery.list.items.firstIndex(of: currentItem)
+        grocery.list.wrappedItems.firstIndex(of: currentItem)
     }
     
     var currentItemPurchased: Bool {
@@ -21,7 +21,7 @@ class GroceryViewModel: ObservableObject {
     
     init(with groceryList: GroceryList) {
         self.grocery = Grocery(list: groceryList, itemsPurchased: [])   // The list is empty at the beginning
-        currentItem = groceryList.items[0]
+        currentItem = groceryList.wrappedItems[0]
     }
     
     func buy() {
@@ -40,20 +40,20 @@ class GroceryViewModel: ObservableObject {
     }
     
     func finish() {
-        self.currentItem = grocery.list.items[0]
+        self.currentItem = grocery.list.wrappedItems[0]
     }
     
     func nextItem() {
         guard let currentItemIndex else { return }
-        if self.grocery.list.items.hasNextItem(for: currentItemIndex) {
-            currentItem = grocery.list.items[currentItemIndex + 1]
+        if self.grocery.list.wrappedItems.hasNextItem(for: currentItemIndex) {
+            currentItem = grocery.list.wrappedItems[currentItemIndex + 1]
         }
     }
     
     func prevItem() {
         guard let currentItemIndex else { return }
-        if self.grocery.list.items.hasPrevIndex(for: currentItemIndex) {
-            currentItem = grocery.list.items[currentItemIndex - 1]
+        if self.grocery.list.wrappedItems.hasPrevIndex(for: currentItemIndex) {
+            currentItem = grocery.list.wrappedItems[currentItemIndex - 1]
         }
     }
 

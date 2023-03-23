@@ -13,10 +13,13 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-        }
+        let newGroceryList = GroceryList(context: viewContext)
+        newGroceryList.name = "Super Semanal"
+        let newGroceryListItem = GroceryListItem(context: viewContext)
+        newGroceryListItem.name = "Manzana"
+        newGroceryListItem.quantity = 2
+        newGroceryListItem.price = 1.25
+        newGroceryList.item = NSSet(set: [newGroceryListItem])
         do {
             try viewContext.save()
         } catch {

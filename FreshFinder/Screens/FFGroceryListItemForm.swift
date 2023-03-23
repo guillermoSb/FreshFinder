@@ -48,17 +48,17 @@ struct FFGroceryListItemForm: View {
                 }
                 Section {
                     Button("\(editMode ? "Editar" : "Guardar")") {
-                        var newItem = GroceryListItem(name: itemName, quantity: itemQuantity)
-                        if let price = Double(itemPrice) {
-                            newItem.price = price
-                        }
-                        if let selectedItem, let idx = items.firstIndex(of: selectedItem) {
-                            if editMode {
-                                items[idx] = newItem
-                            }
-                        } else {
-                            items.append(newItem)
-                        }
+//                        var newItem = GroceryListItem(name: itemName, quantity: itemQuantity)
+//                        if let price = Double(itemPrice) {
+//                            newItem.price = price
+//                        }
+//                        if let selectedItem, let idx = items.firstIndex(of: selectedItem) {
+//                            if editMode {
+//                                items[idx] = newItem
+//                            }
+//                        } else {
+//                            items.append(newItem)
+//                        }
                         selectedItem = nil
                     }
                     .buttonStyle(FFMainButton())
@@ -79,9 +79,9 @@ struct FFGroceryListItemForm: View {
             focusedField = .itemName    // Set the focus on the item name
             if let selectedItem {
                 // Add to the state fields the item fields
-                itemName = selectedItem.name
-                itemQuantity = selectedItem.quantity
-                itemPrice = selectedItem.price != nil ? String(format: "%.2f", selectedItem.price!) : ""
+                itemName = selectedItem.wrappedName
+                itemQuantity = selectedItem.wrappedQuantity
+                itemPrice = String(format: "%.2f", selectedItem.wrappedPrice)
             }
         }
         
@@ -90,8 +90,6 @@ struct FFGroceryListItemForm: View {
 
 struct FFGroceryListItemForm_Previews: PreviewProvider {
     static var previews: some View {
-        FFGroceryListItemForm(selectedItem: .constant(GroceryListItem(name: "Manzana", quantity: 2)), items: .constant([
-            GroceryListItem(name: "Manzana", quantity: 2)
-            ]))
+        FFGroceryListItemForm(selectedItem: .constant(GroceryList.example.wrappedItems.first), items: .constant(GroceryList.example.wrappedItems))
     }
 }

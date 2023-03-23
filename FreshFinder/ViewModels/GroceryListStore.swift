@@ -5,17 +5,26 @@
 //  Created by Guillermo Santos Barrios on 3/4/23.
 //
 
-import Foundation
 import Combine
+import CoreData
 
 class GroceryListStore: ObservableObject {
+    private var viewContext: NSManagedObjectContext
+  
     
     @Published private(set) var groceryLists: [GroceryList] = []
     
     
     
-    init(groceryLists: [GroceryList]) {
-        self.groceryLists = groceryLists
+    init(viewContext: NSManagedObjectContext) {
+        self.viewContext = viewContext
+        fetchGroceryLists()
+    }
+    
+    private func fetchGroceryLists() {
+        let request = GroceryList.fetchRequest()
+        let results = try? viewContext.fetch(request)
+        self.groceryLists = results ?? []
     }
     
 

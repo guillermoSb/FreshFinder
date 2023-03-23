@@ -11,12 +11,12 @@ import SwiftUI
 func groceryListCell(groceryList: GroceryList) -> some View {
     HStack {
         VStack(alignment: .leading, spacing: 12) {
-            Text(groceryList.name)
+            Text(groceryList.wrappedName)
                 .font(.title2)
-            Text("\(groceryList.items.count) productos")
+            Text("\(groceryList.wrappedItems.count) productos")
         }
         Spacer()
-        Text(groceryList.items.budget().toCurrencyString())
+        Text(groceryList.wrappedItems.budget().toCurrencyString())
             .font(.title)
     }
     .padding(24)

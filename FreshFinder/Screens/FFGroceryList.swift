@@ -11,8 +11,8 @@ struct FFGroceryList: View {
     let groceryList: GroceryList
     var body: some View {
         VStack(spacing: 24) {
-            Text(groceryList.name).font(.largeTitle)
-            Text(groceryList.items.budget().toCurrencyString()).font(.title2)
+            Text(groceryList.wrappedName).font(.largeTitle)
+            Text(groceryList.wrappedItems.budget().toCurrencyString()).font(.title2)
             HStack(spacing: 24) {
                 NavigationLink {
                     FFGrocery(groceryViewModel: GroceryViewModel(with: self.groceryList))
@@ -38,8 +38,8 @@ struct FFGroceryList: View {
                 Text("Productos en esta lista")
                     .padding(.leading, 20)
                 List {
-                    ForEach(groceryList.items, id: \.id) { item in
-                        FFItemCell(itemName: item.name, itemQuantity: item.quantity, itemPrice: item.price)
+                    ForEach(groceryList.wrappedItems, id: \.self) { item in
+                        FFItemCell(itemName: item.wrappedName, itemQuantity: item.wrappedQuantity, itemPrice: item.wrappedPrice)
                     }
                 }
                 .listStyle(.plain)
@@ -54,12 +54,10 @@ struct FFGroceryList: View {
 }
 
 struct FFGroceryList_Previews: PreviewProvider {
+  
     static var previews: some View {
         NavigationStack {
-            FFGroceryList(groceryList: GroceryList(name: "Mi Lista", items: [
-                GroceryListItem(name: "Manzanas", quantity: 2, price: 1.50),
-                GroceryListItem(name: "Cereal", quantity: 1)
-            ]))
+            FFGroceryList(groceryList: GroceryList.example)
         }
     }
 }
