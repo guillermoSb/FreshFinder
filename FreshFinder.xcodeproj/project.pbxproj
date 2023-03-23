@@ -29,7 +29,8 @@
 		70D345F929CCD370005DC1C8 /* GroceryListItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D345F329CCD370005DC1C8 /* GroceryListItem+CoreDataClass.swift */; };
 		70D345FA29CCD370005DC1C8 /* GroceryListItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D345F429CCD370005DC1C8 /* GroceryListItem+CoreDataProperties.swift */; };
 		70D345FE29CCD53B005DC1C8 /* Grocery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D345FD29CCD53B005DC1C8 /* Grocery.swift */; };
-		70D3460129CCD5CD005DC1C8 /* GroceryList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 70D345FF29CCD5CD005DC1C8 /* GroceryList.xcdatamodeld */; };
+		70D3460129CCD5CD005DC1C8 /* FreshFinder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 70D345FF29CCD5CD005DC1C8 /* FreshFinder.xcdatamodeld */; };
+		70D5C7FD29CCDE0E00677901 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70D5C7FC29CCDE0E00677901 /* CoreData.framework */; };
 		70F728CB29B843C400153591 /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F728CA29B843C400153591 /* Array+Ext.swift */; };
 		70FE7B2E29B19954009C3380 /* FFMainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FE7B2D29B19954009C3380 /* FFMainButton.swift */; };
 		70FE7B3029B1B3D4009C3380 /* FFGroceryListItemForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FE7B2F29B1B3D4009C3380 /* FFGroceryListItemForm.swift */; };
@@ -79,6 +80,7 @@
 		70D345F429CCD370005DC1C8 /* GroceryListItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroceryListItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		70D345FD29CCD53B005DC1C8 /* Grocery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grocery.swift; sourceTree = "<group>"; };
 		70D3460029CCD5CD005DC1C8 /* FreshFinder.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FreshFinder.xcdatamodel; sourceTree = "<group>"; };
+		70D5C7FC29CCDE0E00677901 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		70F728CA29B843C400153591 /* Array+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ext.swift"; sourceTree = "<group>"; };
 		70FE7B2D29B19954009C3380 /* FFMainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFMainButton.swift; sourceTree = "<group>"; };
 		70FE7B2F29B1B3D4009C3380 /* FFGroceryListItemForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFGroceryListItemForm.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70D5C7FD29CCDE0E00677901 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +136,7 @@
 				709E3BC629B1815100C8F6D0 /* FreshFinderTests */,
 				709E3BD029B1815100C8F6D0 /* FreshFinderUITests */,
 				709E3BAF29B1815000C8F6D0 /* Products */,
+				70D5C7FB29CCDE0D00677901 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -149,7 +153,6 @@
 		709E3BB029B1815000C8F6D0 /* FreshFinder */ = {
 			isa = PBXGroup;
 			children = (
-				70D345FF29CCD5CD005DC1C8 /* GroceryList.xcdatamodeld */,
 				70C8371529BA92D8009582A3 /* ViewBuilders */,
 				709E3BE029B181D700C8F6D0 /* Screens */,
 				708D60D329B2B5D0002063C6 /* CustomViews */,
@@ -161,6 +164,7 @@
 				709E3BB529B1815000C8F6D0 /* Assets.xcassets */,
 				709E3BBA29B1815000C8F6D0 /* Persistence.swift */,
 				709E3BB729B1815000C8F6D0 /* Preview Content */,
+				70D345FF29CCD5CD005DC1C8 /* FreshFinder.xcdatamodeld */,
 			);
 			path = FreshFinder;
 			sourceTree = "<group>";
@@ -229,6 +233,14 @@
 				70C8371629BA92E7009582A3 /* FFGroceryListCell.swift */,
 			);
 			path = ViewBuilders;
+			sourceTree = "<group>";
+		};
+		70D5C7FB29CCDE0D00677901 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				70D5C7FC29CCDE0E00677901 /* CoreData.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		70FE7B2C29B198CF009C3380 /* CustomStyles */ = {
@@ -385,7 +397,7 @@
 				70D345F829CCD370005DC1C8 /* GroceryList+CoreDataProperties.swift in Sources */,
 				70FE7B3029B1B3D4009C3380 /* FFGroceryListItemForm.swift in Sources */,
 				70D345FA29CCD370005DC1C8 /* GroceryListItem+CoreDataProperties.swift in Sources */,
-				70D3460129CCD5CD005DC1C8 /* GroceryList.xcdatamodeld in Sources */,
+				70D3460129CCD5CD005DC1C8 /* FreshFinder.xcdatamodeld in Sources */,
 				709E3BB229B1815000C8F6D0 /* FreshFinderApp.swift in Sources */,
 				70F728CB29B843C400153591 /* Array+Ext.swift in Sources */,
 				70FE7B2E29B19954009C3380 /* FFMainButton.swift in Sources */,
@@ -725,13 +737,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		70D345FF29CCD5CD005DC1C8 /* GroceryList.xcdatamodeld */ = {
+		70D345FF29CCD5CD005DC1C8 /* FreshFinder.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				70D3460029CCD5CD005DC1C8 /* FreshFinder.xcdatamodel */,
 			);
 			currentVersion = 70D3460029CCD5CD005DC1C8 /* FreshFinder.xcdatamodel */;
-			path = GroceryList.xcdatamodeld;
+			path = FreshFinder.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
