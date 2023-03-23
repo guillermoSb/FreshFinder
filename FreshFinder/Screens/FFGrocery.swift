@@ -26,7 +26,7 @@ struct FFGrocery: View {
             .font(.title3)
             
             Spacer()
-            HStack {
+            if groceryViewModel.currentItemPurchased {
                 Button {
                     groceryViewModel.discard()
                 } label: {
@@ -35,7 +35,7 @@ struct FFGrocery: View {
                         .tint(.red)
                 }
                 .buttonStyle(FFCircleButton(foregroundColor: .red))
-                Spacer()
+            } else {
                 Button {
                     groceryViewModel.buy()
                 } label: {
@@ -46,8 +46,7 @@ struct FFGrocery: View {
                 }
                 .buttonStyle(FFCircleButton(foregroundColor: .green))
             }
-            .padding(.horizontal, 52)
-            .padding(.bottom, 20)
+     
             HStack(spacing: 20) {
                 Button {
                     groceryViewModel.prevItem()

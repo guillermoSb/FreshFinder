@@ -15,6 +15,10 @@ class GroceryViewModel: ObservableObject {
         grocery.list.items.firstIndex(of: currentItem)
     }
     
+    var currentItemPurchased: Bool {
+        return grocery.itemsPurchased.firstIndex(of: currentItem) != nil
+    }
+    
     init(with groceryList: GroceryList) {
         self.grocery = Grocery(list: groceryList, itemsPurchased: [])   // The list is empty at the beginning
         currentItem = groceryList.items[0]
@@ -25,14 +29,14 @@ class GroceryViewModel: ObservableObject {
         if grocery.itemsPurchased.firstIndex(of: currentItem) == nil {
             grocery.itemsPurchased.append(currentItem)
         }
-        nextItem()
+        
     }
     
     func discard() {
         if let idx = grocery.itemsPurchased.firstIndex(of: currentItem) {
             grocery.itemsPurchased.remove(at: idx)
         }
-        nextItem()
+     
     }
     
     func finish() {
