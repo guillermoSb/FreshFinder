@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct FFGroceryLists: View {
-    
+    @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject var groceryListStore: GroceryListStore
+    @FetchRequest(
+        sortDescriptors: [],
+        animation: .default)
+    private var groceryLists: FetchedResults<GroceryList>
     
     let columns = [GridItem(.flexible())]
 
@@ -21,7 +25,7 @@ struct FFGroceryLists: View {
                 }
                 .buttonStyle(FFMainButton())
                 List {
-                    ForEach(groceryListStore.groceryLists, id: \.id) { groceryList in
+                    ForEach(groceryLists, id: \.id) { groceryList in
                         ZStack {
                             NavigationLink {
                                 FFGroceryList(groceryList: groceryList)

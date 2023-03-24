@@ -21,6 +21,34 @@ class GroceryListStore: ObservableObject {
         fetchGroceryLists()
     }
     
+    
+    public func createGroceryListItem() -> GroceryListItem {
+        return GroceryListItem(context: viewContext)
+    }
+    
+    public func createGroceryList() -> GroceryList {
+        return GroceryList(context: viewContext)
+    }
+    
+    public func createGroceryList(with items: [GroceryListItem], listName: String) {
+        let newList = GroceryList(context: viewContext)
+        newList.name = listName
+        newList.item = NSSet(set: Set(items))
+        saveContext()
+        fetchGroceryLists() // TODO: Remove this
+    }
+    
+    public func saveContext() {
+        do {
+            try viewContext.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+        
+    }
+    
+    
     private func fetchGroceryLists() {
         let request = GroceryList.fetchRequest()
         let results = try? viewContext.fetch(request)

@@ -21,22 +21,18 @@ class GroceryViewModel: ObservableObject {
     
     init(with groceryList: GroceryList) {
         self.grocery = Grocery(list: groceryList, itemsPurchased: [])   // The list is empty at the beginning
+        print(groceryList.wrappedItems)
         currentItem = groceryList.wrappedItems[0]
     }
     
     func buy() {
         // Only add the item to the list if it is not there
-        if grocery.itemsPurchased.firstIndex(of: currentItem) == nil {
-            grocery.itemsPurchased.append(currentItem)
-        }
+    
         
     }
     
     func discard() {
-        if let idx = grocery.itemsPurchased.firstIndex(of: currentItem) {
-            grocery.itemsPurchased.remove(at: idx)
-        }
-     
+    
     }
     
     func finish() {

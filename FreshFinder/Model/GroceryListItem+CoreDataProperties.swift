@@ -21,7 +21,7 @@ extension GroceryListItem {
     @NSManaged public var price: Double
     
     public var wrappedName: String {
-        name ?? "Unnamed"
+        name ?? ""
     }
     
     public var wrappedQuantity: Int {

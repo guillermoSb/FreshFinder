@@ -48,17 +48,15 @@ struct FFGroceryListItemForm: View {
                 }
                 Section {
                     Button("\(editMode ? "Editar" : "Guardar")") {
-//                        var newItem = GroceryListItem(name: itemName, quantity: itemQuantity)
-//                        if let price = Double(itemPrice) {
-//                            newItem.price = price
-//                        }
-//                        if let selectedItem, let idx = items.firstIndex(of: selectedItem) {
-//                            if editMode {
-//                                items[idx] = newItem
-//                            }
-//                        } else {
-//                            items.append(newItem)
-//                        }
+                        if let selectedItem {
+                            if let price = Double(itemPrice) {
+                                print("PRICE IS")
+                                selectedItem.price = price
+                            }
+                            selectedItem.name = itemName
+                            selectedItem.quantity = Int32(itemQuantity)
+                            items.append(selectedItem)
+                        }
                         selectedItem = nil
                     }
                     .buttonStyle(FFMainButton())
