@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7010A97E29D109FF00FDB94B /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 7010A97D29D109FF00FDB94B /* Realm */; };
+		7010A98029D109FF00FDB94B /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7010A97F29D109FF00FDB94B /* RealmSwift */; };
 		702D4D4129C694B10055E053 /* FFGrocery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702D4D4029C694B10055E053 /* FFGrocery.swift */; };
 		702D4D4329C696050055E053 /* FFCircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702D4D4229C696050055E053 /* FFCircleButton.swift */; };
 		7063D6BB29C7AE91005E7D3B /* Grocery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7063D6BA29C7AE91005E7D3B /* Grocery.swift */; };
@@ -83,6 +85,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7010A98029D109FF00FDB94B /* RealmSwift in Frameworks */,
+				7010A97E29D109FF00FDB94B /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +251,10 @@
 			dependencies = (
 			);
 			name = FreshFinder;
+			packageProductDependencies = (
+				7010A97D29D109FF00FDB94B /* Realm */,
+				7010A97F29D109FF00FDB94B /* RealmSwift */,
+			);
 			productName = FreshFinder;
 			productReference = 709E3BAE29B1815000C8F6D0 /* FreshFinder.app */;
 			productType = "com.apple.product-type.application";
@@ -319,6 +327,9 @@
 				Base,
 			);
 			mainGroup = 709E3BA529B1815000C8F6D0;
+			packageReferences = (
+				7010A97C29D109FF00FDB94B /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = 709E3BAF29B1815000C8F6D0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -711,6 +722,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7010A97C29D109FF00FDB94B /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7010A97D29D109FF00FDB94B /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7010A97C29D109FF00FDB94B /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		7010A97F29D109FF00FDB94B /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7010A97C29D109FF00FDB94B /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		709E3BBC29B1815000C8F6D0 /* FreshFinder.xcdatamodeld */ = {
