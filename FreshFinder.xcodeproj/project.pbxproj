@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7010A97E29D109FF00FDB94B /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 7010A97D29D109FF00FDB94B /* Realm */; };
 		7010A98029D109FF00FDB94B /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7010A97F29D109FF00FDB94B /* RealmSwift */; };
+		7010A98229D10DF000FDB94B /* List+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7010A98129D10DF000FDB94B /* List+Ext.swift */; };
 		702D4D4129C694B10055E053 /* FFGrocery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702D4D4029C694B10055E053 /* FFGrocery.swift */; };
 		702D4D4329C696050055E053 /* FFCircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702D4D4229C696050055E053 /* FFCircleButton.swift */; };
 		7063D6BB29C7AE91005E7D3B /* Grocery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7063D6BA29C7AE91005E7D3B /* Grocery.swift */; };
@@ -52,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7010A98129D10DF000FDB94B /* List+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+Ext.swift"; sourceTree = "<group>"; };
 		702D4D4029C694B10055E053 /* FFGrocery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFGrocery.swift; sourceTree = "<group>"; };
 		702D4D4229C696050055E053 /* FFCircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFCircleButton.swift; sourceTree = "<group>"; };
 		7063D6BA29C7AE91005E7D3B /* Grocery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grocery.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			children = (
 				708D60D729B2F771002063C6 /* Double+Ext.swift */,
 				70F728CA29B843C400153591 /* Array+Ext.swift */,
+				7010A98129D10DF000FDB94B /* List+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 				70A7FF2129B42FB9000EF8F5 /* GroceryListStore.swift in Sources */,
 				70A7FF2429B43208000EF8F5 /* GroceryList.swift in Sources */,
 				702D4D4329C696050055E053 /* FFCircleButton.swift in Sources */,
+				7010A98229D10DF000FDB94B /* List+Ext.swift in Sources */,
 				70FE7B3029B1B3D4009C3380 /* FFGroceryListItemForm.swift in Sources */,
 				709E3BB229B1815000C8F6D0 /* FreshFinderApp.swift in Sources */,
 				70F728CB29B843C400153591 /* Array+Ext.swift in Sources */,
