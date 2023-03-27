@@ -10,14 +10,15 @@ import SwiftUI
 struct FFGrocery: View {
     @Environment(\.presentationMode) var presentation
     @ObservedObject var groceryViewModel: GroceryViewModel
-    
+    @State private var buttonColorChange: Bool = false
     
     var body: some View {
         VStack(spacing: 24) {
             Text(groceryViewModel.currentItem.name)
                 .font(.system(size: itemFontSize))
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .center, spacing: 12) {
                 Text("Cantidad: \(groceryViewModel.currentItem.quantity)")
+                Text(groceryViewModel.currentItem.measureUnit.rawValue)
                 if let price = groceryViewModel.currentItem.price {
                     Text("Precio Unitario: \(price.toCurrencyString())")
                     Text("Total: \((Double(groceryViewModel.currentItem.quantity) * price).toCurrencyString())")
@@ -26,27 +27,26 @@ struct FFGrocery: View {
             .font(.title3)
             
             Spacer()
-            if groceryViewModel.currentItemPurchased {
-                Button {
+            
+            Button {
+                
+                    
+                if groceryViewModel.currentItemPurchased {
                     groceryViewModel.discard()
-                } label: {
-                    Image(systemName: "xmark")
-                        .font(.system(size: iconSize))
-                        .tint(.red)
-                }
-                .buttonStyle(FFCircleButton(foregroundColor: .red))
-            } else {
-                Button {
+                } else {
                     groceryViewModel.buy()
-                } label: {
-                    Image(systemName: "cart.fill")
-                        .font(.system(size: iconSize))
-                        .tint(.green)
-                       
                 }
-                .buttonStyle(FFCircleButton(foregroundColor: .green))
+                withAnimation(.easeIn(duration: 0.15)) {
+                    buttonColorChange.toggle()
+                }
+                
+            } label: {
+                Image(systemName: groceryViewModel.currentItemPurchased ? "xmark" : "cart.fill")
+                    .font(.system(size: iconSize))
+                    .tint(buttonColorChange ? .red : .green)
             }
-     
+            .buttonStyle(FFCircleButton(foregroundColor: buttonColorChange ? .red : .green))
+            
             HStack(spacing: 20) {
                 Button {
                     groceryViewModel.prevItem()
@@ -73,13 +73,16 @@ struct FFGrocery: View {
                           !groceryViewModel.grocery.list.items.hasNextItem(for: groceryViewModel.currentItemIndex!)
                           : true)
             }
-           
-
+            
+            
+        }
+        .onAppear {
+            buttonColorChange = groceryViewModel.currentItemPurchased
         }
         
     }
     
-
+    
     private let itemFontSize: CGFloat = 52
     private let iconSize: CGFloat = 40
 }

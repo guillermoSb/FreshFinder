@@ -21,6 +21,7 @@ struct FFGroceryListItemForm: View {
     @State var itemName: String = ""
     @State var itemPrice: String = ""
     @State var itemQuantity: Int = 1
+    @State var itemUnit: MeasureUnit = .unit
   
     // Wether the view is editing an item or adding
     var editMode: Bool {
@@ -40,6 +41,11 @@ struct FFGroceryListItemForm: View {
                         .focused($focusedField, equals: .itemName)
                     TextField("Precio", text: $itemPrice)
                         .keyboardType(.decimalPad)
+                    Picker("Unidad de medida", selection: $itemUnit) {
+                        ForEach(MeasureUnit.allCases, id: \.self) { unit in
+                            Text(unit.rawValue)
+                        }
+                    }
                     Stepper(value: $itemQuantity, in: 1...100, step: 1) {
                         Text("Cantidad: \(itemQuantity)")
                     }
@@ -48,7 +54,7 @@ struct FFGroceryListItemForm: View {
                 }
                 Section {
                     Button("\(editMode ? "Editar" : "Guardar")") {
-                        let newItem = GroceryListItem(value: ["name": itemName, "quantity": itemQuantity])
+                        let newItem = GroceryListItem(value: ["name": itemName, "quantity": itemQuantity, "measureUnit": itemUnit ])
                         if let price = Double(itemPrice) {
                             newItem.price = price
                         }
@@ -82,6 +88,7 @@ struct FFGroceryListItemForm: View {
                 itemName = selectedItem.name
                 itemQuantity = selectedItem.quantity
                 itemPrice = selectedItem.price != nil ? String(format: "%.2f", selectedItem.price!) : ""
+                itemUnit = selectedItem.measureUnit
             }
         }
         

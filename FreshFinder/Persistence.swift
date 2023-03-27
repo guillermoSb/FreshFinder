@@ -11,6 +11,7 @@ import Realm
 struct Persistence {
     static let shared = Persistence(inMemory: false)
     static private let identifier = "FreshFinderRealm"
+    static private let version = 2
     let realm: Realm
     
     static let preview: Persistence = {
@@ -36,7 +37,7 @@ struct Persistence {
         if inMemory {
             config = Realm.Configuration(inMemoryIdentifier: Persistence.identifier)
         } else {
-            config = Realm.Configuration()
+            config = Realm.Configuration(schemaVersion: UInt64(Persistence.version))
         }
         self.realm = try! Realm(configuration: config)
     }
