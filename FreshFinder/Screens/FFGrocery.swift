@@ -86,9 +86,6 @@ struct FFGrocery: View {
 
 struct FFGrocery_Previews: PreviewProvider {
     static var previews: some View {
-        FFGrocery(groceryViewModel: GroceryViewModel(with: GroceryList(name: "Super Semanal", items: [
-            GroceryListItem(name: "Manzana", quantity: 1, price: 1.50),
-            GroceryListItem(name: "Peras", quantity: 2, price: 2.50)
-        ])))
+        FFGrocery(groceryViewModel: GroceryViewModel(with: GroceryList(value: ["name": "My Test List"])))
     }
 }

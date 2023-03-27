@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct FFGroceryLists: View {
     
     @ObservedObject var groceryListStore: GroceryListStore
+    
+    @ObservedResults(GroceryList.self) var lists
     
     let columns = [GridItem(.flexible())]
 
@@ -21,9 +24,10 @@ struct FFGroceryLists: View {
                 }
                 .buttonStyle(FFMainButton())
                 List {
-                    ForEach(groceryListStore.groceryLists, id: \.id) { groceryList in
+                    ForEach(lists, id: \._id) { groceryList in
                         ZStack {
                             NavigationLink {
+
                                 FFGroceryList(groceryList: groceryList)
                             } label: {
                                 EmptyView()
@@ -36,7 +40,7 @@ struct FFGroceryLists: View {
                         .listRowSeparator(.hidden)
                     }
                     .onDelete(perform: { deletedRows in
-                        groceryListStore.deleteLists(at: deletedRows)
+                        $lists.remove(atOffsets: deletedRows)
                     })
                     
                     
@@ -56,9 +60,7 @@ struct FFGroceryLists: View {
 
 struct FFGroceryLists_Previews: PreviewProvider {
     static var previews: some View {
-        FFGroceryLists(groceryListStore: GroceryListStore(groceryLists: [
-            GroceryList(name: "Primera Lista", items: [GroceryListItem(name: "Manzana", quantity: 2)]),
-            GroceryList(name: "Segunda Lista", items: [GroceryListItem(name: "Manzana", quantity: 2)])
-        ]))
+        FFGroceryLists(groceryListStore: GroceryListStore())
+            .environment(\.realm, Persistence.preview.realm)
     }
 }

@@ -48,7 +48,7 @@ struct FFGroceryListItemForm: View {
                 }
                 Section {
                     Button("\(editMode ? "Editar" : "Guardar")") {
-                        var newItem = GroceryListItem(name: itemName, quantity: itemQuantity)
+                        let newItem = GroceryListItem(value: ["name": itemName, "quantity": itemQuantity])
                         if let price = Double(itemPrice) {
                             newItem.price = price
                         }
@@ -90,8 +90,8 @@ struct FFGroceryListItemForm: View {
 
 struct FFGroceryListItemForm_Previews: PreviewProvider {
     static var previews: some View {
-        FFGroceryListItemForm(selectedItem: .constant(GroceryListItem(name: "Manzana", quantity: 2)), items: .constant([
-            GroceryListItem(name: "Manzana", quantity: 2)
-            ]))
+        FFGroceryListItemForm(selectedItem: .constant(GroceryListItem(value: ["name": "Manzana", "quantity": 2])), items: .constant([
+            GroceryListItem(value: ["name": "Manzana", "quantity": 2])
+        ]))
     }
 }

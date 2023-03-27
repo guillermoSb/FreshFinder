@@ -39,12 +39,12 @@ struct FFGroceryListForm: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                 Section {
                     List {
-                        ForEach(items, id: \.self) { item in
+                        ForEach(items, id: \._id) { item in
                             FFItemCell(itemName: item.name, itemQuantity: item.quantity, itemPrice: item.price)
                                 .onTapGesture {
                                     selectedItem = item
                                 }
-                                
+
                         }
                         .onDelete { positionsRemoved in
                             items.remove(atOffsets: positionsRemoved)
@@ -53,14 +53,14 @@ struct FFGroceryListForm: View {
                             items.move(fromOffsets: positionsMoved, toOffset: destinationPosition)
                         }
                         Button("Agregar") {
-                            selectedItem = GroceryListItem(name: "", quantity: 1)
+                            selectedItem = GroceryListItem(value: ["name": "", "quantity": 1])
                         }
                         .sheet(item: $selectedItem) { item in
                             FFGroceryListItemForm(selectedItem: $selectedItem, items: $items)
                         }
                     }
-                    
-                    
+
+
                 } header: {
                     Text("Productos")
                 } footer: {
@@ -73,6 +73,7 @@ struct FFGroceryListForm: View {
                         presentation.wrappedValue.dismiss()
                     }
                     .buttonStyle(FFMainButton())
+                    .disabled(items.isEmpty)
                 }
                 .listRowInsets(.init())
                 .listRowBackground(Color.white.opacity(0))
@@ -91,9 +92,8 @@ struct FFGroceryListForm_Previews: PreviewProvider {
     
     static var previews: some View {
         let view = FFGroceryListForm(listName: "Prueba", items: [
-            GroceryListItem(name: "Manzana", quantity: 1)
         ])
         return view
-            .environmentObject(GroceryListStore(groceryLists: []))
+            .environmentObject(GroceryListStore())
     }
 }

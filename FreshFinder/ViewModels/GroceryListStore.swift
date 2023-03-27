@@ -9,24 +9,15 @@ import Foundation
 import Combine
 
 class GroceryListStore: ObservableObject {
-    
-    @Published private(set) var groceryLists: [GroceryList] = []
-    
-    
-    
-    init(groceryLists: [GroceryList]) {
-        self.groceryLists = groceryLists
-    }
-    
 
-    // MARK: User Intents
-    
     func addList(_ groceryList: GroceryList) {
-        self.groceryLists.append(groceryList)
+        try! Persistence.shared.realm.write {
+            Persistence.shared.realm.add(groceryList)
+        }
     }
     
     func deleteLists(at indexSet: IndexSet) {
-        groceryLists.remove(atOffsets: indexSet)
+//        groceryLists.remove(atOffsets: indexSet)
     }
     
 }

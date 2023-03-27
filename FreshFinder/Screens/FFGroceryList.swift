@@ -38,7 +38,7 @@ struct FFGroceryList: View {
                 Text("Productos en esta lista")
                     .padding(.leading, 20)
                 List {
-                    ForEach(groceryList.items, id: \.id) { item in
+                    ForEach(groceryList.items, id: \._id) { item in
                         FFItemCell(itemName: item.name, itemQuantity: item.quantity, itemPrice: item.price)
                     }
                 }
@@ -56,10 +56,7 @@ struct FFGroceryList: View {
 struct FFGroceryList_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            FFGroceryList(groceryList: GroceryList(name: "Mi Lista", items: [
-                GroceryListItem(name: "Manzanas", quantity: 2, price: 1.50),
-                GroceryListItem(name: "Cereal", quantity: 1)
-            ]))
+            FFGroceryList(groceryList: GroceryList(value: ["name": "My Test List"]))
         }
     }
 }

@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct FFMainButton: ButtonStyle {
-    
+    @Environment(\.isEnabled) var isEnabled
+
     private let backgroundColor: Color
     
     init() {
@@ -29,7 +30,10 @@ struct FFMainButton: ButtonStyle {
                 RoundedRectangle(cornerRadius: 12)
             )
             .opacity(configuration.isPressed ? 0.3 : 1)
+            .saturation(isEnabled ? 1 : 0.1)
+            .opacity(isEnabled ? 1 : 0.5)
             .animation(.linear(duration: 0.08), value: configuration.isPressed)
+            
 
     }
 }
