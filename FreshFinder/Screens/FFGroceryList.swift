@@ -6,11 +6,10 @@
 //
 
 import SwiftUI
-
+import RealmSwift
 struct FFGroceryList: View {
     @EnvironmentObject var groceryListStore: GroceryListStore
-    
-    let groceryList: GroceryList
+    @ObservedRealmObject var groceryList: GroceryList
     var body: some View {
         VStack(spacing: 24) {
             Text(groceryList.name).font(.largeTitle)

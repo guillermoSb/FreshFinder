@@ -14,6 +14,8 @@ struct FFGroceryLists: View {
     
     @ObservedResults(GroceryList.self) var lists
     
+    
+    
     let columns = [GridItem(.flexible())]
 
     var body: some View {
