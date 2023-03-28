@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct FFGroceryList: View {
+    @EnvironmentObject var groceryListStore: GroceryListStore
+    
     let groceryList: GroceryList
     var body: some View {
         VStack(spacing: 24) {
@@ -44,8 +46,19 @@ struct FFGroceryList: View {
                 }
                 .listStyle(.plain)
             }
-            
         }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationLink {
+                    FFGroceryListForm(from: groceryList)
+                        .environmentObject(groceryListStore)
+                } label: {
+                    Text("Editar")
+                }
+
+            }
+        }
+
         
         
     }

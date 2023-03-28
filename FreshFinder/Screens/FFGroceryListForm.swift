@@ -10,15 +10,25 @@ import SwiftUI
 struct FFGroceryListForm: View {
     @Environment(\.presentationMode) var presentation
     
+    private var groceryList: GroceryList?
+    
     @State private var listName: String = ""
     @State private var items: [GroceryListItem] = []
     @State private var selectedItem: GroceryListItem? = nil
     @EnvironmentObject var groceryListStore: GroceryListStore
     
     init(){}
+    
     init(listName: String, items: [GroceryListItem]) {
        _listName = State(initialValue: listName)
        _items = State(initialValue: items)
+    }
+    
+    init(from groceryList: GroceryList) {
+        self.groceryList = groceryList
+        _listName = State(initialValue: groceryList.name)
+        _items = State(initialValue: groceryList.items.map({$0}))
+
     }
     
     
@@ -59,8 +69,6 @@ struct FFGroceryListForm: View {
                             FFGroceryListItemForm(selectedItem: $selectedItem, items: $items)
                         }
                     }
-
-
                 } header: {
                     Text("Productos")
                 } footer: {
@@ -69,7 +77,12 @@ struct FFGroceryListForm: View {
                 
                 Section {
                     Button("Guardar") {
-                        groceryListStore.addList(GroceryList(name: listName, items: items))
+                        if let groceryList {
+                            groceryListStore.editList(groceryList, name: listName, items: items)
+                            
+                        } else {
+                            groceryListStore.addList(GroceryList(name: listName, items: items))
+                        }
                         presentation.wrappedValue.dismiss()
                     }
                     .buttonStyle(FFMainButton())
@@ -77,14 +90,10 @@ struct FFGroceryListForm: View {
                 }
                 .listRowInsets(.init())
                 .listRowBackground(Color.white.opacity(0))
-                                
-                                
-                                
-                
             }
-            
-            .navigationTitle("Nueva Lista")
+            .navigationTitle(groceryList != nil ? "Editar Lista" : "Nueva Lista")
         }
+        
     }
 }
 

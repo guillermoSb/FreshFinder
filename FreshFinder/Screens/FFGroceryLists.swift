@@ -29,6 +29,7 @@ struct FFGroceryLists: View {
                             NavigationLink {
 
                                 FFGroceryList(groceryList: groceryList)
+                                    .environmentObject(groceryListStore)
                             } label: {
                                 EmptyView()
                             }
@@ -62,5 +63,6 @@ struct FFGroceryLists_Previews: PreviewProvider {
     static var previews: some View {
         FFGroceryLists(groceryListStore: GroceryListStore())
             .environment(\.realm, Persistence.preview.realm)
+            .environmentObject(GroceryListStore())
     }
 }
