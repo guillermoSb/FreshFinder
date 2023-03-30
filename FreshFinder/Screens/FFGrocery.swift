@@ -34,14 +34,14 @@ struct FFGrocery: View {
                 } else {
                     groceryViewModel.buy()
                 }
-                withAnimation(.easeIn(duration: 0.15)) {
+                withAnimation(.easeIn(duration: 0.20)) {
                     buttonColorChange.toggle()
                 }
                 
             } label: {
                 Image(systemName: groceryViewModel.currentItemPurchased ? "xmark" : "cart.fill")
                     .font(.system(size: iconSize))
-                    .tint(buttonColorChange ? .red : .green)
+                    .foregroundColor(buttonColorChange ? .red : .green)
             }
             .buttonStyle(FFCircleButton(foregroundColor: buttonColorChange ? .red : .green))
             
@@ -56,7 +56,6 @@ struct FFGrocery: View {
                           !groceryViewModel.grocery.list.items.hasPrevIndex(for: groceryViewModel.currentItemIndex!)
                           : true)
                 Button {
-                    groceryViewModel.finish()
                     presentation.wrappedValue.dismiss()
                 } label: {
                     Text("Terminar")

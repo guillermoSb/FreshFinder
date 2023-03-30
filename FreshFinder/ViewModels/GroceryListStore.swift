@@ -49,6 +49,7 @@ class GroceryListStore: ObservableObject {
         let groceryListFromRealm = Persistence.shared.realm.object(ofType: GroceryList.self, forPrimaryKey: groceryList._id)
         if let groceryListFromRealm {
             try! Persistence.shared.realm.write {
+                UserDefaults.standard.set(0, forKey: groceryList._id.stringValue)
                 for item in groceryListFromRealm.items {
                     item.purchased = false
                 }

@@ -6,11 +6,15 @@
 //
 
 import Combine
+import Foundation
 
 class GroceryViewModel: ObservableObject {
     @Published private(set) var grocery: Grocery
-    @Published private(set) var currentItem: GroceryListItem
-    @Published private var hi = false
+    @Published private(set) var currentItem: GroceryListItem {
+        didSet {
+            UserDefaults.standard.set(currentItemIndex!, forKey: grocery.list._id.stringValue)
+        }
+    }
     
     var currentItemIndex: Int? {
         grocery.list.items.firstIndex(of: currentItem)
@@ -22,7 +26,12 @@ class GroceryViewModel: ObservableObject {
     
     init(with groceryList: GroceryList) {
         self.grocery = Grocery(list: groceryList, itemsPurchased: [])   // The list is empty at the beginning
-        currentItem = groceryList.items[0]
+        // Set the current item
+        var currentItemFromDefaults = UserDefaults.standard.integer(forKey: groceryList._id.stringValue)
+        if currentItemFromDefaults >= groceryList.items.count {
+            currentItemFromDefaults = 0
+        }
+        currentItem = groceryList.items[currentItemFromDefaults]
     }
     
     func buy() {
@@ -48,11 +57,6 @@ class GroceryViewModel: ObservableObject {
         }
     }
     
-    
-    
-    func finish() {
-        self.currentItem = grocery.list.items[0]
-    }
     
     
     func nextItem() {
