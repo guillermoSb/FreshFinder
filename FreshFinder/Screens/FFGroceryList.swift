@@ -16,7 +16,7 @@ struct FFGroceryList: View {
             Text(groceryList.items.budget().toCurrencyString()).font(.title2)
             HStack(spacing: 24) {
                 NavigationLink {
-                    FFGrocery(groceryViewModel: GroceryViewModel(with: self.groceryList))
+                    FFGrocery(groceryViewModel: GroceryViewModel(with: self.groceryList.freeze()))
                 } label: {
                     Image(systemName: "play.fill")
                         .font(.system(size: iconSize))
@@ -26,13 +26,15 @@ struct FFGroceryList: View {
                 .buttonStyle(FFCircleButton(foregroundColor: .green))
 
                 Button {
-                    // Restart
+                    groceryListStore.reset(groceryList)
                 } label: {
                     Text("Reiniciar")
                         .font(.system(size: 20, weight: .bold))
                         .foregroundColor(.blue)
                 }
+                .disabled(groceryList.items.filter {$0.purchased}.count <= 0)
                 .buttonStyle(FFMainButton(backgroundColor: .blue.opacity(0.2)))
+                
             }
             
             VStack(alignment: .leading, spacing: 24) {
@@ -40,7 +42,10 @@ struct FFGroceryList: View {
                     .padding(.leading, 20)
                 List {
                     ForEach(groceryList.items, id: \._id) { item in
-                        FFItemCell(itemName: item.name, itemQuantity: item.quantity, itemPrice: item.price)
+                        FFItemCell(purchased: item.purchased, itemName: item.name, itemQuantity: item.quantity, itemPrice: item.price)
+                            .onTapGesture {
+                                groceryListStore.toggleItemPurchased(item)
+                            }
                     }
                 }
                 .listStyle(.plain)

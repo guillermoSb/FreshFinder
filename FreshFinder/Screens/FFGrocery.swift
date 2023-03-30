@@ -29,8 +29,6 @@ struct FFGrocery: View {
             Spacer()
             
             Button {
-                
-                    
                 if groceryViewModel.currentItemPurchased {
                     groceryViewModel.discard()
                 } else {
@@ -50,6 +48,7 @@ struct FFGrocery: View {
             HStack(spacing: 20) {
                 Button {
                     groceryViewModel.prevItem()
+                    buttonColorChange = groceryViewModel.currentItemPurchased
                 } label: {
                     Text("Anterior")
                 }
@@ -66,6 +65,7 @@ struct FFGrocery: View {
                 
                 Button {
                     groceryViewModel.nextItem()
+                    buttonColorChange = groceryViewModel.currentItemPurchased
                 } label: {
                     Text("Siguiente")
                 }

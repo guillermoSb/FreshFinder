@@ -29,7 +29,6 @@ struct FFGroceryLists: View {
                     ForEach(lists, id: \._id) { groceryList in
                         ZStack {
                             NavigationLink {
-
                                 FFGroceryList(groceryList: groceryList)
                                     .environmentObject(groceryListStore)
                             } label: {
@@ -56,6 +55,7 @@ struct FFGroceryLists: View {
             .padding(.horizontal)
             .navigationTitle("Tus Listas")
             .frame(maxWidth: .infinity, alignment: .leading)
+           
         }
     }
     

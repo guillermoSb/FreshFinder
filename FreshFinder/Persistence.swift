@@ -11,7 +11,7 @@ import Realm
 struct Persistence {
     static let shared = Persistence(inMemory: false)
     static private let identifier = "FreshFinderRealm"
-    static private let version = 2
+    static private let version = 3
     let realm: Realm
     
     static let preview: Persistence = {

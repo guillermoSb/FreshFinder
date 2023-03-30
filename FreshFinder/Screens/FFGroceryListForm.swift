@@ -50,7 +50,7 @@ struct FFGroceryListForm: View {
                 Section {
                     List {
                         ForEach(items, id: \._id) { item in
-                            FFItemCell(itemName: item.name, itemQuantity: item.quantity, itemPrice: item.price)
+                            FFItemCell(purchased: false,itemName: item.name, itemQuantity: item.quantity, itemPrice: item.price)
                                 .onTapGesture {
                                     selectedItem = item
                                 }

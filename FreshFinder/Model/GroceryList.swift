@@ -30,6 +30,7 @@ class GroceryListItem: Object, Identifiable {
     @Persisted var quantity = 0
     @Persisted var measureUnit: MeasureUnit = .unit
     @Persisted var price: Double?
+    @Persisted var purchased: Bool = false
 }
 
 

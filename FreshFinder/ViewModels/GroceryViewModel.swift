@@ -10,13 +10,14 @@ import Combine
 class GroceryViewModel: ObservableObject {
     @Published private(set) var grocery: Grocery
     @Published private(set) var currentItem: GroceryListItem
+    @Published private var hi = false
     
     var currentItemIndex: Int? {
         grocery.list.items.firstIndex(of: currentItem)
     }
     
     var currentItemPurchased: Bool {
-        return grocery.itemsPurchased.firstIndex(of: currentItem) != nil
+        return currentItem.purchased
     }
     
     init(with groceryList: GroceryList) {
@@ -25,23 +26,34 @@ class GroceryViewModel: ObservableObject {
     }
     
     func buy() {
-        // Only add the item to the list if it is not there
         if grocery.itemsPurchased.firstIndex(of: currentItem) == nil {
-            grocery.itemsPurchased.append(currentItem)
+            let groceryListItemFromRealm = Persistence.shared.realm.object(ofType: GroceryListItem.self, forPrimaryKey: currentItem._id)
+            if let groceryListItemFromRealm {
+                try! Persistence.shared.realm.write {
+                    groceryListItemFromRealm.purchased = true
+                }
+            }
         }
         
     }
     
     func discard() {
-        if let idx = grocery.itemsPurchased.firstIndex(of: currentItem) {
-            grocery.itemsPurchased.remove(at: idx)
+        if grocery.itemsPurchased.firstIndex(of: currentItem) == nil {
+            let groceryListItemFromRealm = Persistence.shared.realm.object(ofType: GroceryListItem.self, forPrimaryKey: currentItem._id)
+            if let groceryListItemFromRealm {
+                try! Persistence.shared.realm.write {
+                    groceryListItemFromRealm.purchased = false
+                }
+            }
         }
-     
     }
+    
+    
     
     func finish() {
         self.currentItem = grocery.list.items[0]
     }
+    
     
     func nextItem() {
         guard let currentItemIndex else { return }
@@ -49,6 +61,7 @@ class GroceryViewModel: ObservableObject {
             currentItem = grocery.list.items[currentItemIndex + 1]
         }
     }
+    
     
     func prevItem() {
         guard let currentItemIndex else { return }
