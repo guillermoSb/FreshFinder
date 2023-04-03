@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-@main
+ @main
 struct FreshFinderApp: App {
     var body: some Scene {
         WindowGroup {

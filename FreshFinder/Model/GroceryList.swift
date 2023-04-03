@@ -31,6 +31,14 @@ class GroceryListItem: Object, Identifiable {
     @Persisted var measureUnit: MeasureUnit = .unit
     @Persisted var price: Double?
     @Persisted var purchased: Bool = false
+    
+    convenience init(name: String, quantity: Int, measureUnit: MeasureUnit = .unit, price: Double?) {
+        self.init()
+        self.name = name
+        self.quantity = quantity
+        self.measureUnit = measureUnit
+        self.price = price
+    }
 }
 
 
