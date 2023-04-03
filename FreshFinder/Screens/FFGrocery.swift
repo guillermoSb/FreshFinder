@@ -10,7 +10,10 @@ import SwiftUI
 struct FFGrocery: View {
     @Environment(\.presentationMode) var presentation
     @ObservedObject var groceryViewModel: GroceryViewModel
+    
+    @State private var currentItemEdited: GroceryListItem? = nil
     @State private var buttonColorChange: Bool = false
+    @State private var showEditItemSheed = false
     
     var body: some View {
         VStack(spacing: 24) {
@@ -78,17 +81,28 @@ struct FFGrocery: View {
         .onAppear {
             buttonColorChange = groceryViewModel.currentItemPurchased
         }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Editar") {
+                    self.currentItemEdited = groceryViewModel.currentItem
+                    self.showEditItemSheed = true
+                }
+            }
+        }
+        .sheet(item: $currentItemEdited) { item in
+            FFGroceryListItemForm(isQuickEdit: true, selectedItem: $currentItemEdited, items: .constant([]))
+                .environmentObject(groceryViewModel)
+        }
         
     }
-    
-    
+        
     private let itemFontSize: CGFloat = 52
     private let iconSize: CGFloat = 40
 }
 
 struct FFGrocery_Previews: PreviewProvider {
     static var previews: some View {
-        FFGrocery(groceryViewModel: GroceryViewModel(with: GroceryList(name: "My List", items: [GroceryListItem(name: "Manzana", quantity: 12, price: 0.12)]) ))
+        FFGrocery(groceryViewModel: GroceryViewModel(with: GroceryList(name: "My List", items: [GroceryListItem(name: "Manzana", quantity: 12, price: 0.12)])))
             
     }
 }

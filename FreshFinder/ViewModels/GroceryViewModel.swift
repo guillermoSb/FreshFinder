@@ -73,5 +73,16 @@ class GroceryViewModel: ObservableObject {
             currentItem = grocery.list.items[currentItemIndex - 1]
         }
     }
+    
+    func editItem(_ item: GroceryListItem) {
+        if let groceryItemFromRealm = Persistence.shared.realm.object(ofType: GroceryListItem.self, forPrimaryKey: currentItem._id) {
+            try! Persistence.shared.realm.write {
+                groceryItemFromRealm.name = item.name
+                groceryItemFromRealm.price = item.price
+                groceryItemFromRealm.measureUnit = item.measureUnit
+                groceryItemFromRealm.quantity = item.quantity
+            }
+        }
+    }
 
 }

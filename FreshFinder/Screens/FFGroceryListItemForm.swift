@@ -9,10 +9,14 @@ import SwiftUI
 
 struct FFGroceryListItemForm: View {
     
+    @EnvironmentObject var groceryViewModel: GroceryViewModel
+    
     // Form fields that can be focused by code
     enum FocusedField {
         case itemName
     }
+    
+    var isQuickEdit = false
     
     @Binding var selectedItem: GroceryListItem?
     @Binding var items: [GroceryListItem]
@@ -25,10 +29,7 @@ struct FFGroceryListItemForm: View {
   
     // Wether the view is editing an item or adding
     var editMode: Bool {
-        guard let selectedItem else {return false}
-        let idx = items.firstIndex(of: selectedItem)
-        guard idx != nil else { return false }
-        return true  
+        return selectedItem != nil
     }
     
     
@@ -58,14 +59,21 @@ struct FFGroceryListItemForm: View {
                         if let price = Double(itemPrice) {
                             newItem.price = price
                         }
-                        if let selectedItem, let idx = items.firstIndex(of: selectedItem) {
-                            if editMode {
-                                items[idx] = newItem
-                            }
+                        if isQuickEdit {
+                            groceryViewModel.editItem(newItem)
                         } else {
-                            items.append(newItem)
+                           
+                            if let selectedItem, let idx = items.firstIndex(of: selectedItem) {
+                                if editMode {
+                                    items[idx] = newItem
+                                }
+                            } else {
+                                items.append(newItem)
+                            }
+                          
                         }
                         selectedItem = nil
+                        
                     }
                     .buttonStyle(FFMainButton())
                 }

@@ -73,7 +73,7 @@ struct FFGroceryList: View {
 struct FFGroceryList_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            FFGroceryList(groceryList: GroceryList(value: ["name": "My Test List"]))
+            FFGroceryList(groceryList: GroceryList(name: "My List", items: [GroceryListItem(name: "Manzana", quantity: 12, price: 0.12)]))
         }
     }
 }
