@@ -23,8 +23,8 @@ struct FFGrocery: View {
                 Text("Cantidad: \(groceryViewModel.currentItem.quantity)")
                 Text(groceryViewModel.currentItem.measureUnit.rawValue)
                 if let price = groceryViewModel.currentItem.price {
-                    Text("Precio Unitario: \(price.toCurrencyString())")
-                    Text("Total: \((Double(groceryViewModel.currentItem.quantity) * price).toCurrencyString())")
+                    Text("Precio Unitario: \(price.toCurrencyString(groceryViewModel.grocery.list.currency))")
+                    Text("Total: \((Double(groceryViewModel.currentItem.quantity) * price).toCurrencyString(groceryViewModel.grocery.list.currency))")
                 }
             }
             .font(.title3)
@@ -61,7 +61,7 @@ struct FFGrocery: View {
                 Button {
                     presentation.wrappedValue.dismiss()
                 } label: {
-                    Text("Terminar")
+                    Text("Listo")
                 }
                 .buttonStyle(FFMainButton(backgroundColor: .blue))
                 
@@ -102,7 +102,7 @@ struct FFGrocery: View {
 
 struct FFGrocery_Previews: PreviewProvider {
     static var previews: some View {
-        FFGrocery(groceryViewModel: GroceryViewModel(with: GroceryList(name: "My List", items: [GroceryListItem(name: "Manzana", quantity: 12, price: 0.12)])))
+        FFGrocery(groceryViewModel: GroceryViewModel(with: GroceryList(name: "My List", currency: .quetzal, items: [GroceryListItem(name: "Manzana", quantity: 12, price: 0.12)])))
             
     }
 }

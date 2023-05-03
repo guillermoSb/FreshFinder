@@ -13,13 +13,15 @@ class GroceryList: Object, Identifiable {
     @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted var name: String = ""
     @Persisted var createdAt = Date()
+    @Persisted var currency: Currency = .quetzal
     
     // Items for this GroceryList
     @Persisted var items: List<GroceryListItem>
     
-    convenience init(name: String, items: [GroceryListItem]) {
+    convenience init(name: String, currency: Currency = .quetzal, items: [GroceryListItem]) {
         self.init()
         self.name = name
+        self.currency = currency
         self.items.append(objectsIn: items)
     }
 }
@@ -47,6 +49,13 @@ enum MeasureUnit: String, PersistableEnum {
     case pound = "Libra"
     case liter = "Litro"
     case dozen = "Docena"
+}
+
+enum Currency: String, PersistableEnum {
+    case quetzal = "GTQ"
+    case dollar = "USD"
+    case euro = "EUR"
+    case mexicanPeso = "MXN"
 }
 
 

@@ -54,7 +54,7 @@ struct FFGroceryListItemForm: View {
                     Text("Información del producto")
                 }
                 Section {
-                    Button("\(editMode ? "Editar" : "Guardar")") {
+                    Button("Guardar") {
                         let newItem = GroceryListItem(value: ["name": itemName, "quantity": itemQuantity, "measureUnit": itemUnit ])
                         if let price = Double(itemPrice) {
                             newItem.price = price

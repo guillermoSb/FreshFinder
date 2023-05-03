@@ -13,7 +13,7 @@ struct FFGroceryList: View {
     var body: some View {
         VStack(spacing: 24) {
             Text(groceryList.name).font(.largeTitle)
-            Text(groceryList.items.budget().toCurrencyString()).font(.title2)
+            Text(groceryList.items.budget().toCurrencyString(groceryList.currency)).font(.title2)
             HStack(spacing: 24) {
                 NavigationLink {
                     FFGrocery(groceryViewModel: GroceryViewModel(with: self.groceryList.freeze()))
@@ -42,7 +42,7 @@ struct FFGroceryList: View {
                     .padding(.leading, 20)
                 List {
                     ForEach(groceryList.items, id: \._id) { item in
-                        FFItemCell(purchased: item.purchased, itemName: item.name, itemQuantity: item.quantity, itemPrice: item.price)
+                        FFItemCell(currency: groceryList.currency, purchased: item.purchased, itemName: item.name, itemQuantity: item.quantity, itemPrice: item.price)
                             .onTapGesture {
                                 groceryListStore.toggleItemPurchased(item)
                             }

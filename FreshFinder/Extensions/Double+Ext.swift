@@ -8,11 +8,11 @@
 import Foundation
 
 extension Double {
-    func toCurrencyString() -> String {
+    func toCurrencyString(_ currency: Currency) -> String {
         let currencyFormatter = NumberFormatter()
         currencyFormatter.usesGroupingSeparator = true
         currencyFormatter.numberStyle = .currency
-        currencyFormatter.locale = Locale.current
+        currencyFormatter.currencyCode = currency.rawValue
         let priceString = currencyFormatter.string(from: NSNumber(value: self))!
         return priceString
     }

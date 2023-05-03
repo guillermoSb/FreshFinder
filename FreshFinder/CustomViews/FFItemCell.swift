@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct FFItemCell: View {
+    let currency: Currency
     var purchased = true
     var itemName: String
     var itemQuantity: Int
@@ -21,7 +22,7 @@ struct FFItemCell: View {
                 Spacer()
                 Group {
                     if let itemPrice {
-                        Text("\(itemPrice.toCurrencyString())")
+                        Text("\(itemPrice.toCurrencyString(currency))")
                     } else {
                         Text("Precio no disponible")
                     }
@@ -45,6 +46,6 @@ struct FFItemCell: View {
 
 struct FFProductCell_Previews: PreviewProvider {
     static var previews: some View {
-        FFItemCell(itemName: "Manzanas", itemQuantity: 2, itemPrice: 33.333)
+        FFItemCell(currency: .quetzal,itemName: "Manzanas", itemQuantity: 2, itemPrice: 33.333)
     }
 }

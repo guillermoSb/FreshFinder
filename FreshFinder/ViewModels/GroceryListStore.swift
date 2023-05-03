@@ -19,11 +19,12 @@ class GroceryListStore: ObservableObject {
     }
     
     
-    func editList(_ groceryList: GroceryList, name: String, items: [GroceryListItem]) {
+    func editList(_ groceryList: GroceryList, name: String, currency: Currency ,items: [GroceryListItem]) {
         let groceryListFromRealm = Persistence.shared.realm.object(ofType: GroceryList.self, forPrimaryKey: groceryList._id)
         if let groceryListFromRealm {
             try! Persistence.shared.realm.write {
                 groceryListFromRealm.name = name
+                groceryListFromRealm.currency = currency
                 groceryListFromRealm.items.removeAll()
                 for item in items {
                     let newItem = GroceryListItem(value: ["name": item.name, "price": item.price as Any, "quantity": item.quantity, "measureUnit": item.measureUnit, "purchased": item.purchased])
