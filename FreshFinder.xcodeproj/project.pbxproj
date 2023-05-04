@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7010A97E29D109FF00FDB94B /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 7010A97D29D109FF00FDB94B /* Realm */; };
+		7010A98029D109FF00FDB94B /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7010A97F29D109FF00FDB94B /* RealmSwift */; };
+		7010A98229D10DF000FDB94B /* List+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7010A98129D10DF000FDB94B /* List+Ext.swift */; };
 		702D4D4129C694B10055E053 /* FFGrocery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702D4D4029C694B10055E053 /* FFGrocery.swift */; };
 		702D4D4329C696050055E053 /* FFCircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702D4D4229C696050055E053 /* FFCircleButton.swift */; };
 		7063D6BD29C7AF1A005E7D3B /* GroceryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7063D6BC29C7AF1A005E7D3B /* GroceryViewModel.swift */; };
@@ -54,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7010A98129D10DF000FDB94B /* List+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+Ext.swift"; sourceTree = "<group>"; };
 		702D4D4029C694B10055E053 /* FFGrocery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFGrocery.swift; sourceTree = "<group>"; };
 		702D4D4229C696050055E053 /* FFCircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFCircleButton.swift; sourceTree = "<group>"; };
 		7063D6BC29C7AF1A005E7D3B /* GroceryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryViewModel.swift; sourceTree = "<group>"; };
@@ -91,7 +95,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				70D5C7FD29CCDE0E00677901 /* CoreData.framework in Frameworks */,
+				7010A98029D109FF00FDB94B /* RealmSwift in Frameworks */,
+				7010A97E29D109FF00FDB94B /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +130,7 @@
 			children = (
 				708D60D729B2F771002063C6 /* Double+Ext.swift */,
 				70F728CA29B843C400153591 /* Array+Ext.swift */,
+				7010A98129D10DF000FDB94B /* List+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -268,6 +274,10 @@
 			dependencies = (
 			);
 			name = FreshFinder;
+			packageProductDependencies = (
+				7010A97D29D109FF00FDB94B /* Realm */,
+				7010A97F29D109FF00FDB94B /* RealmSwift */,
+			);
 			productName = FreshFinder;
 			productReference = 709E3BAE29B1815000C8F6D0 /* FreshFinder.app */;
 			productType = "com.apple.product-type.application";
@@ -340,6 +350,9 @@
 				Base,
 			);
 			mainGroup = 709E3BA529B1815000C8F6D0;
+			packageReferences = (
+				7010A97C29D109FF00FDB94B /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = 709E3BAF29B1815000C8F6D0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -394,7 +407,7 @@
 				709E3BE429B183F700C8F6D0 /* FFGroceryListForm.swift in Sources */,
 				70A7FF2129B42FB9000EF8F5 /* GroceryListStore.swift in Sources */,
 				702D4D4329C696050055E053 /* FFCircleButton.swift in Sources */,
-				70D345F829CCD370005DC1C8 /* GroceryList+CoreDataProperties.swift in Sources */,
+				7010A98229D10DF000FDB94B /* List+Ext.swift in Sources */,
 				70FE7B3029B1B3D4009C3380 /* FFGroceryListItemForm.swift in Sources */,
 				70D345FA29CCD370005DC1C8 /* GroceryListItem+CoreDataProperties.swift in Sources */,
 				70D3460129CCD5CD005DC1C8 /* FreshFinder.xcdatamodeld in Sources */,
@@ -567,8 +580,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -600,8 +613,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -735,6 +748,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7010A97C29D109FF00FDB94B /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7010A97D29D109FF00FDB94B /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7010A97C29D109FF00FDB94B /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		7010A97F29D109FF00FDB94B /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7010A97C29D109FF00FDB94B /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		70D345FF29CCD5CD005DC1C8 /* FreshFinder.xcdatamodeld */ = {

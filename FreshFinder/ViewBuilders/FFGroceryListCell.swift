@@ -16,7 +16,7 @@ func groceryListCell(groceryList: GroceryList) -> some View {
             Text("\(groceryList.wrappedItems.count) productos")
         }
         Spacer()
-        Text(groceryList.wrappedItems.budget().toCurrencyString())
+        Text(groceryList.items.budget().toCurrencyString(groceryList.currency))
             .font(.title)
     }
     .padding(24)

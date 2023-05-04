@@ -7,14 +7,12 @@
 
 import SwiftUI
 
-@main
+ @main
 struct FreshFinderApp: App {
-    let persistenceController = PersistenceController.shared
-
     var body: some Scene {
         WindowGroup {
-            FFGroceryLists(groceryListStore: GroceryListStore(viewContext: persistenceController.container.viewContext))
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            FFGroceryLists(groceryListStore: GroceryListStore())
+                .environment(\.realm, Persistence.shared.realm)
         }
     }
 }

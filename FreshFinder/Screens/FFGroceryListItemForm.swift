@@ -9,10 +9,14 @@ import SwiftUI
 
 struct FFGroceryListItemForm: View {
     
+    @EnvironmentObject var groceryViewModel: GroceryViewModel
+    
     // Form fields that can be focused by code
     enum FocusedField {
         case itemName
     }
+    
+    var isQuickEdit = false
     
     @Binding var selectedItem: GroceryListItem?
     @Binding var items: [GroceryListItem]
@@ -21,13 +25,11 @@ struct FFGroceryListItemForm: View {
     @State var itemName: String = ""
     @State var itemPrice: String = ""
     @State var itemQuantity: Int = 1
+    @State var itemUnit: MeasureUnit = .unit
   
     // Wether the view is editing an item or adding
     var editMode: Bool {
-        guard let selectedItem else {return false}
-        let idx = items.firstIndex(of: selectedItem)
-        guard idx != nil else { return false }
-        return true  
+        return selectedItem != nil
     }
     
     
@@ -40,6 +42,11 @@ struct FFGroceryListItemForm: View {
                         .focused($focusedField, equals: .itemName)
                     TextField("Precio", text: $itemPrice)
                         .keyboardType(.decimalPad)
+                    Picker("Unidad de medida", selection: $itemUnit) {
+                        ForEach(MeasureUnit.allCases, id: \.self) { unit in
+                            Text(unit.rawValue)
+                        }
+                    }
                     Stepper(value: $itemQuantity, in: 1...100, step: 1) {
                         Text("Cantidad: \(itemQuantity)")
                     }
@@ -47,17 +54,26 @@ struct FFGroceryListItemForm: View {
                     Text("Información del producto")
                 }
                 Section {
-                    Button("\(editMode ? "Editar" : "Guardar")") {
-                        if let selectedItem {
-                            if let price = Double(itemPrice) {
-                                print("PRICE IS")
-                                selectedItem.price = price
+                    Button("Guardar") {
+                        let newItem = GroceryListItem(value: ["name": itemName, "quantity": itemQuantity, "measureUnit": itemUnit ])
+                        if let price = Double(itemPrice) {
+                            newItem.price = price
+                        }
+                        if isQuickEdit {
+                            groceryViewModel.editItem(newItem)
+                        } else {
+                           
+                            if let selectedItem, let idx = items.firstIndex(of: selectedItem) {
+                                if editMode {
+                                    items[idx] = newItem
+                                }
+                            } else {
+                                items.append(newItem)
                             }
-                            selectedItem.name = itemName
-                            selectedItem.quantity = Int32(itemQuantity)
-                            items.append(selectedItem)
+                          
                         }
                         selectedItem = nil
+                        
                     }
                     .buttonStyle(FFMainButton())
                 }
@@ -77,9 +93,10 @@ struct FFGroceryListItemForm: View {
             focusedField = .itemName    // Set the focus on the item name
             if let selectedItem {
                 // Add to the state fields the item fields
-                itemName = selectedItem.wrappedName
-                itemQuantity = selectedItem.wrappedQuantity
-                itemPrice = String(format: "%.2f", selectedItem.wrappedPrice)
+                itemName = selectedItem.name
+                itemQuantity = selectedItem.quantity
+                itemPrice = selectedItem.price != nil ? String(format: "%.2f", selectedItem.price!) : ""
+                itemUnit = selectedItem.measureUnit
             }
         }
         
@@ -88,6 +105,8 @@ struct FFGroceryListItemForm: View {
 
 struct FFGroceryListItemForm_Previews: PreviewProvider {
     static var previews: some View {
-        FFGroceryListItemForm(selectedItem: .constant(GroceryList.example.wrappedItems.first), items: .constant(GroceryList.example.wrappedItems))
+        FFGroceryListItemForm(selectedItem: .constant(GroceryListItem(value: ["name": "Manzana", "quantity": 2])), items: .constant([
+            GroceryListItem(value: ["name": "Manzana", "quantity": 2])
+        ]))
     }
 }

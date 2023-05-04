@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct FFGroceryLists: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -14,6 +15,10 @@ struct FFGroceryLists: View {
         sortDescriptors: [],
         animation: .default)
     private var groceryLists: FetchedResults<GroceryList>
+    
+    @ObservedResults(GroceryList.self) var lists
+    
+    
     
     let columns = [GridItem(.flexible())]
 
@@ -25,10 +30,11 @@ struct FFGroceryLists: View {
                 }
                 .buttonStyle(FFMainButton())
                 List {
-                    ForEach(groceryLists, id: \.id) { groceryList in
+                    ForEach(lists, id: \._id) { groceryList in
                         ZStack {
                             NavigationLink {
                                 FFGroceryList(groceryList: groceryList)
+                                    .environmentObject(groceryListStore)
                             } label: {
                                 EmptyView()
                             }
@@ -40,7 +46,7 @@ struct FFGroceryLists: View {
                         .listRowSeparator(.hidden)
                     }
                     .onDelete(perform: { deletedRows in
-                        groceryListStore.deleteLists(at: deletedRows)
+                        $lists.remove(atOffsets: deletedRows)
                     })
                     
                     
@@ -53,6 +59,7 @@ struct FFGroceryLists: View {
             .padding(.horizontal)
             .navigationTitle("Tus Listas")
             .frame(maxWidth: .infinity, alignment: .leading)
+           
         }
     }
     
@@ -60,7 +67,8 @@ struct FFGroceryLists: View {
 
 struct FFGroceryLists_Previews: PreviewProvider {
     static var previews: some View {
-        FFGroceryLists(groceryListStore: GroceryListStore(viewContext: PersistenceController.preview.container.viewContext))
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        FFGroceryLists(groceryListStore: GroceryListStore())
+            .environment(\.realm, Persistence.preview.realm)
+            .environmentObject(GroceryListStore())
     }
 }

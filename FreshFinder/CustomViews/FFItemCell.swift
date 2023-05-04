@@ -8,32 +8,44 @@
 import SwiftUI
 
 struct FFItemCell: View {
+    let currency: Currency
+    var purchased = true
     var itemName: String
     var itemQuantity: Int
     var itemPrice: Double?
     
     var body: some View {
-        HStack {
-            Text("\(itemQuantity)").fontWeight(.semibold)
-            Text(itemName).fontWeight(.semibold)
-            Spacer()
-            Group {
-                if let itemPrice {
-                    Text("\(itemPrice.toCurrencyString())")
-                } else {
-                    Text("Precio no disponible")
+        ZStack {
+            HStack {
+                Text("\(itemQuantity)").fontWeight(.semibold)
+                Text(itemName).fontWeight(.semibold)
+                Spacer()
+                Group {
+                    if let itemPrice {
+                        Text("\(itemPrice.toCurrencyString(currency))")
+                    } else {
+                        Text("Precio no disponible")
+                    }
+                    
                 }
-                
+                .fontWeight(.light)
+               
             }
-            .fontWeight(.light)
-           
+            if purchased {
+               RoundedRectangle(cornerRadius: 10)
+                    .fill(.green.opacity(0.5))
+                    .frame(height:1)
+                    
+                    
+            }
         }
+        
         
     }
 }
 
 struct FFProductCell_Previews: PreviewProvider {
     static var previews: some View {
-        FFItemCell(itemName: "Manzanas", itemQuantity: 2, itemPrice: 33.333)
+        FFItemCell(currency: .quetzal,itemName: "Manzanas", itemQuantity: 2, itemPrice: 33.333)
     }
 }

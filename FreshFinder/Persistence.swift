@@ -5,55 +5,40 @@
 //  Created by Guillermo Santos Barrios on 3/2/23.
 //
 
-import CoreData
+import RealmSwift
+import Realm
 
-struct PersistenceController {
-    static let shared = PersistenceController()
-
-    static var preview: PersistenceController = {
-        let result = PersistenceController(inMemory: true)
-        let viewContext = result.container.viewContext
-        let newGroceryList = GroceryList(context: viewContext)
-        newGroceryList.name = "Super Semanal"
-        let newGroceryListItem = GroceryListItem(context: viewContext)
-        newGroceryListItem.name = "Manzana"
-        newGroceryListItem.quantity = 2
-        newGroceryListItem.price = 1.25
-        newGroceryList.item = NSSet(set: [newGroceryListItem])
+struct Persistence {
+    static let shared = Persistence(inMemory: false)
+    static private let identifier = "FreshFinderRealm"
+    static private let version = 4
+    let realm: Realm
+    
+    static let preview: Persistence = {
+        let persistence = Persistence(inMemory: true)
+        // Insert Dummy data
+        let item1 = GroceryListItem(value: ["name": "Manzanas", "quantity": 2, "price": 0.25])
+        let item2 = GroceryListItem(value: ["name": "Cereal", "quantity": 1, "price": 1.00])
+        let list = GroceryList(value: ["name": "My Test List"])
+        list.items.append(item1)
+        list.items.append(item2)
         do {
-            try viewContext.save()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
-        return result
-    }()
-
-    let container: NSPersistentContainer
-
-    init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "FreshFinder")
-        if inMemory {
-            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
-        }
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-
-                /*
-                 Typical reasons for an error here include:
-                 * The parent directory does not exist, cannot be created, or disallows writing.
-                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                 * The device is out of space.
-                 * The store could not be migrated to the current model version.
-                 Check the error message to determine what the actual problem was.
-                 */
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+            try persistence.realm.write {
+                persistence.realm.add(list)
             }
-        })
-        container.viewContext.automaticallyMergesChangesFromParent = true
+        } catch {
+            fatalError("Could not create preview data: \(error)")
+        }
+        return persistence
+    }()
+    
+    private init(inMemory: Bool) {
+        var config: Realm.Configuration
+        if inMemory {
+            config = Realm.Configuration(inMemoryIdentifier: Persistence.identifier)
+        } else {
+            config = Realm.Configuration(schemaVersion: UInt64(Persistence.version))
+        }
+        self.realm = try! Realm(configuration: config)
     }
 }

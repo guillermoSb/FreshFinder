@@ -6,16 +6,17 @@
 //
 
 import SwiftUI
-
+import RealmSwift
 struct FFGroceryList: View {
-    let groceryList: GroceryList
+    @EnvironmentObject var groceryListStore: GroceryListStore
+    @ObservedRealmObject var groceryList: GroceryList
     var body: some View {
         VStack(spacing: 24) {
-            Text(groceryList.wrappedName).font(.largeTitle)
-            Text(groceryList.wrappedItems.budget().toCurrencyString()).font(.title2)
+            Text(groceryList.name).font(.largeTitle)
+            Text(groceryList.items.budget().toCurrencyString(groceryList.currency)).font(.title2)
             HStack(spacing: 24) {
                 NavigationLink {
-                    FFGrocery(groceryViewModel: GroceryViewModel(with: self.groceryList))
+                    FFGrocery(groceryViewModel: GroceryViewModel(with: self.groceryList.freeze()))
                 } label: {
                     Image(systemName: "play.fill")
                         .font(.system(size: iconSize))
@@ -25,27 +26,43 @@ struct FFGroceryList: View {
                 .buttonStyle(FFCircleButton(foregroundColor: .green))
 
                 Button {
-                    // Restart
+                    groceryListStore.reset(groceryList)
                 } label: {
                     Text("Reiniciar")
                         .font(.system(size: 20, weight: .bold))
                         .foregroundColor(.blue)
                 }
+                .disabled(groceryList.items.filter {$0.purchased}.count <= 0)
                 .buttonStyle(FFMainButton(backgroundColor: .blue.opacity(0.2)))
+                
             }
             
             VStack(alignment: .leading, spacing: 24) {
                 Text("Productos en esta lista")
                     .padding(.leading, 20)
                 List {
-                    ForEach(groceryList.wrappedItems, id: \.self) { item in
-                        FFItemCell(itemName: item.wrappedName, itemQuantity: item.wrappedQuantity, itemPrice: item.wrappedPrice)
+                    ForEach(groceryList.items, id: \._id) { item in
+                        FFItemCell(currency: groceryList.currency, purchased: item.purchased, itemName: item.name, itemQuantity: item.quantity, itemPrice: item.price)
+                            .onTapGesture {
+                                groceryListStore.toggleItemPurchased(item)
+                            }
                     }
                 }
                 .listStyle(.plain)
             }
-            
         }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationLink {
+                    FFGroceryListForm(from: groceryList)
+                        .environmentObject(groceryListStore)
+                } label: {
+                    Text("Editar")
+                }
+
+            }
+        }
+
         
         
     }
@@ -57,7 +74,7 @@ struct FFGroceryList_Previews: PreviewProvider {
   
     static var previews: some View {
         NavigationStack {
-            FFGroceryList(groceryList: GroceryList.example)
+            FFGroceryList(groceryList: GroceryList(name: "My List", items: [GroceryListItem(name: "Manzana", quantity: 12, price: 0.12)]))
         }
     }
 }
